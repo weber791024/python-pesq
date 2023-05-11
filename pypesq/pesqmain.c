@@ -240,7 +240,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 {
     float * ftmp = NULL;
     int i;
-
+    printf ("testWeber791024");
     ref_info-> data = NULL;
     ref_info-> VAD = NULL;
     ref_info-> logVAD = NULL;
