@@ -121,7 +121,7 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     SIGNAL_INFO ref_info;
     SIGNAL_INFO deg_info;
     ERROR_INFO err_info;
-    printf ("Weber791024");
+    printf ("Weber791024\n");
     long Error_Flag = 0;
     char * Error_Type = "Unknown error type.";
 
