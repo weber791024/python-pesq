@@ -121,7 +121,7 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     SIGNAL_INFO ref_info;
     SIGNAL_INFO deg_info;
     ERROR_INFO err_info;
-    printf ("testWeber791024");
+    printf ("Weber791024");
     long Error_Flag = 0;
     char * Error_Type = "Unknown error type.";
 
@@ -134,7 +134,7 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     err_info.mode = NB_MODE;
 
 
-//     select_rate (sample_rate, &Error_Flag, &Error_Type);
+    select_rate (sample_rate, &Error_Flag, &Error_Type);
 //     pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
 
     float pesq_score = err_info.pesq_mos;
