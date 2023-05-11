@@ -382,7 +382,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         //printf (" Acoustic model processing...\n");    
         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
-    
+        printf ("testWeber791024");
         safe_free (ref_info-> data);
         safe_free (ref_info-> VAD);
         safe_free (ref_info-> logVAD);
