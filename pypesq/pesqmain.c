@@ -89,7 +89,7 @@ AGREEMENT. PESQ PATENT-ONLY LICENSE AGREEMENTS MAY BE OBTAINED FROM OPTICOM.
 
 
 ***********************************************************************
-*  OPTICOM GmbH                    *  Psytechnics Limited             *
+*  OPTICOM GmbH                    *  Psytechnics Limited             
 *  Naegelsbachstr. 38,             *  Fraser House, 23 Museum Street, *
 *  D- 91052 Erlangen, Germany      *  Ipswich IP1 1HN, England        *
 *  Phone: +49 (0) 9131 53020 0     *  Phone: +44 (0) 1473 261 800     *
