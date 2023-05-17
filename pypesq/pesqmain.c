@@ -109,7 +109,7 @@ Further information is also available from www.pesq.org
 #include "dsp.h"
 
 #define ITU_RESULTS_FILE          "pesq_results.txt"
-
+#define  W  128
 
 // int main (int argc, const char *argv []);
 void usage (void);
