@@ -126,7 +126,7 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     char * Error_Type = "Unknown error type.";
 	
 	FILE *Ifp,*ttt;
-	ttt=fopen("newfile.txt","w");
+	ttt=fopen("newfile2.txt","w");
 //     FILE *fp1;
 //     fopen_s(&fp1, "newfile.wav", "w+, ccs=UNICODE");
 
