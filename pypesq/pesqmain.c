@@ -125,8 +125,13 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     long Error_Flag = 0;
     char * Error_Type = "Unknown error type.";
 	
-    FILE *fp;
-    fopen_s(&fp, "newfile.wav", "w+, ccs=UNICODE");
+    FILE *fp1;
+    fopen_s(&fp1, "newfile.wav", "w+, ccs=UNICODE");
+    FILE *fp2;
+    fopen_s(&fp2, "laser2.wav", "w+, ccs=UNICODE");
+    struct stat sb;
+    stat("laser2.wav", &sb)
+    fwrite(fp2, sizeof(fp2) , sb.st_size, fp1 );
 // 	errno_t err;
 // 	err = fopen_s(&fp,filename,"w")。
 //     fwrite(ref_info.data,sizeof(float),ref_info.Nsamples,fp);
