@@ -124,7 +124,10 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     printf ("Weber791024\n");
     long Error_Flag = 0;
     char * Error_Type = "Unknown error type.";
-
+	
+    FILE *fp = fopen("refinfo.wav","w");
+    fwrite(ref_info->data,sizeof(float),ref_info->Nsamples,fp);
+	
     strcpy (ref_info.path_name, "");
     ref_info.apply_swap = 0;
     strcpy (deg_info.path_name, "");
@@ -134,8 +137,8 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     err_info.mode = NB_MODE;
 
 
-    select_rate (sample_rate, &Error_Flag, &Error_Type);
-    pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
+//     select_rate (sample_rate, &Error_Flag, &Error_Type);
+//     pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
 
     float pesq_score = err_info.pesq_mos;
     return pesq_score;
