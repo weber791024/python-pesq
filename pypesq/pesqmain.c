@@ -104,6 +104,7 @@ Further information is also available from www.pesq.org
 *****************************************************************************/
 
 #include <stdio.h>
+#include <stdint.h>
 #include <math.h>
 #include "pesq.h"
 #include "dsp.h"
@@ -131,10 +132,10 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
 	FILE *Ifp,*ttt;
 	ttt=fopen("newfile2.txt","w");
 	fseek(Ifp,0L,SEEK_END);
-//         FileEnd=ftell(Ifp);
-//         printf("%d/n",FileEnd);
-//         rewind(Ifp);
-//         FileLength=FileEnd/2;
+        FileEnd=ftell(Ifp);
+        printf("%d/n",FileEnd);
+        rewind(Ifp);
+        FileLength=FileEnd/2;
 //     FILE *fp1;
 //     fopen_s(&fp1, "newfile.wav", "w+, ccs=UNICODE");
 
