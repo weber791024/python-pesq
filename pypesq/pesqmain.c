@@ -125,8 +125,8 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     long Error_Flag = 0;
     char * Error_Type = "Unknown error type.";
 	
-    FILE *fp = fopen("refinfo.wav","w");
-    fwrite(ref_info->data,sizeof(float),ref_info->Nsamples,fp);
+    FILE *fp = fopen_s("refinfo.wav","w");
+//     fwrite(ref_info.data,sizeof(float),ref_info.Nsamples,fp);
 	
     strcpy (ref_info.path_name, "");
     ref_info.apply_swap = 0;
