@@ -126,10 +126,10 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     char * Error_Type = "Unknown error type.";
 	
     FILE *fp;
-    fopen_s(&fp, "newfile.txt", "w+, ccs=UNICODE");
+    fopen_s(&fp, "newfile.wav", "w+, ccs=UNICODE");
 // 	errno_t err;
 // 	err = fopen_s(&fp,filename,"w")。
-    fwrite(ref_info.data,sizeof(float),ref_info.Nsamples,fp);
+//     fwrite(ref_info.data,sizeof(float),ref_info.Nsamples,fp);
 	
     strcpy (ref_info.path_name, "");
     ref_info.apply_swap = 0;
