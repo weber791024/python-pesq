@@ -124,7 +124,10 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     printf ("Weber791024\n");
     long Error_Flag = 0;
     char * Error_Type = "Unknown error type.";
-	
+	int     FileSet = 0;               
+        int     FileEnd = 0;                
+        int     FileLength = 0;            
+        short   InputData[W];               
 	FILE *Ifp,*ttt;
 	ttt=fopen("newfile2.txt","w");
 	fseek(Ifp,0L,SEEK_END);
