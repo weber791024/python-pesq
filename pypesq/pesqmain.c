@@ -284,11 +284,11 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     deg_info-> VAD = NULL;
     deg_info-> logVAD = NULL;
         
-//     if ((*Error_Flag) == 0)
-//     {
-//        load_src (Error_Flag, Error_Type, ref_info, ref_data, ref_n_samples, fs);
+    if ((*Error_Flag) == 0)
+    {
+       load_src (Error_Flag, Error_Type, ref_info, ref_data, ref_n_samples, fs);
 
-//     }
+    }
 //     if ((*Error_Flag) == 0)
 //     {
 //        load_src (Error_Flag, Error_Type, deg_info, deg_data, deg_n_samples, fs);
