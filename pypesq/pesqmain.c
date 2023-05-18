@@ -119,7 +119,7 @@ struct floatArray{
 
 
 void saveasBin(struct floatArray float_eg, char* fileDir){  
-    FILE *pFile = fopen(fileDir, "wb+");
+    FILE *pFile = fopen(fileDir, "w");
     for(int i = 0; i < float_eg.fLen; i++){
         fwrite(&float_eg.fData[i], float_size, 1, pFile);
     }
@@ -416,8 +416,8 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         //printf (" Acoustic model processing...\n");    
         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
 	struct floatArray test_info;
-	test_info.fData=ref_info.data;
-	test_info.fLen=ref_info.Nsamples;
+	test_info.fData=ref_info->data;
+	test_info.fLen=ref_info->Nsamples;
         saveasBin(test_info,"refinfo");
         safe_free (ref_info-> data);
         safe_free (ref_info-> VAD);
