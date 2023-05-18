@@ -478,7 +478,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         //    fclose (resultsFile);
         }
 
-//     }
+    }
 
     return;
 }
