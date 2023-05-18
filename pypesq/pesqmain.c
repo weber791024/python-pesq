@@ -302,10 +302,10 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         (*Error_Type) = "Reference or Degraded below 1/4 second - processing stopped ";
     }
 
-//     if ((*Error_Flag) == 0)
-//     {
-//         alloc_other (ref_info, deg_info, Error_Flag, Error_Type, &ftmp);
-//     }
+    if ((*Error_Flag) == 0)
+    {
+        alloc_other (ref_info, deg_info, Error_Flag, Error_Type, &ftmp);
+    }
 
 //     if ((*Error_Flag) == 0)
 //     {   
