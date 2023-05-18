@@ -302,13 +302,13 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         fix_power_level (ref_info, "reference", maxNsamples);
         fix_power_level (deg_info, "degraded", maxNsamples);
 
-//         if( Fs == 16000 ) {
-//             WB_InIIR_Nsos = WB_InIIR_Nsos_16k;
-//             WB_InIIR_Hsos = WB_InIIR_Hsos_16k;
-//         } else {
-//             WB_InIIR_Nsos = WB_InIIR_Nsos_8k;
-//             WB_InIIR_Hsos = WB_InIIR_Hsos_8k;
-//         }
+        if( Fs == 16000 ) {
+            WB_InIIR_Nsos = WB_InIIR_Nsos_16k;
+            WB_InIIR_Hsos = WB_InIIR_Hsos_16k;
+        } else {
+            WB_InIIR_Nsos = WB_InIIR_Nsos_8k;
+            WB_InIIR_Hsos = WB_InIIR_Hsos_8k;
+        }
 //         if( ref_info->input_filter == 1 ) {
 //             apply_filter (ref_info-> data, ref_info-> Nsamples, 26, standard_IRS_filter_dB);
 //         } else {
