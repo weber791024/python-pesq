@@ -141,23 +141,6 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     printf ("Weber791024\n");
     long Error_Flag = 0;
     char * Error_Type = "Unknown error type.";
-// 	int     FileSet = 0;               
-//         int     FileEnd = 0;                
-//         int     FileLength = 0;            
-//         short   InputData[W];               
-// 	FILE *Ifp,*ttt;
-// 	ttt=fopen("newfile2.txt","w");
-// 	fseek(Ifp,0L,SEEK_END);
-//         FileEnd=ftell(Ifp);
-//         printf("%d/n",FileEnd);
-//         rewind(Ifp);
-//         FileLength=FileEnd/2;
-//     FILE *fp1;
-//     fopen_s(&fp1, "newfile.wav", "w+, ccs=UNICODE");
-
-// 	errno_t err;
-// 	err = fopen_s(&fp,filename,"w")。
-//     fwrite(ref_info.data,sizeof(float),ref_info.Nsamples,fp);
 	
     strcpy (ref_info.path_name, "");
     ref_info.apply_swap = 0;
