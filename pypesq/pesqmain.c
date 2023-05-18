@@ -109,6 +109,22 @@ Further information is also available from www.pesq.org
 #include "pesq.h"
 #include "dsp.h"
 
+#define float_size sizeof(float)
+#define char_size sizeof(char)
+
+struct floatArray{
+	float* fData; // float数组
+	int fLen; // 数组长度
+};
+
+
+void saveasBin(struct floatArray float_eg, char* fileDir){  
+    FILE *pFile = fopen(fileDir, "wb+");
+    for(int i = 0; i < float_eg.fLen; i++){
+        fwrite(&float_eg.fData[i], float_size, 1, pFile);
+    }
+    fclose(pFile);
+}
 #define ITU_RESULTS_FILE          "pesq_results.txt"
 #define  W  128
 
@@ -125,17 +141,17 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     printf ("Weber791024\n");
     long Error_Flag = 0;
     char * Error_Type = "Unknown error type.";
-	int     FileSet = 0;               
-        int     FileEnd = 0;                
-        int     FileLength = 0;            
-        short   InputData[W];               
-	FILE *Ifp,*ttt;
-	ttt=fopen("newfile2.txt","w");
-	fseek(Ifp,0L,SEEK_END);
-        FileEnd=ftell(Ifp);
-        printf("%d/n",FileEnd);
-        rewind(Ifp);
-        FileLength=FileEnd/2;
+// 	int     FileSet = 0;               
+//         int     FileEnd = 0;                
+//         int     FileLength = 0;            
+//         short   InputData[W];               
+// 	FILE *Ifp,*ttt;
+// 	ttt=fopen("newfile2.txt","w");
+// 	fseek(Ifp,0L,SEEK_END);
+//         FileEnd=ftell(Ifp);
+//         printf("%d/n",FileEnd);
+//         rewind(Ifp);
+//         FileLength=FileEnd/2;
 //     FILE *fp1;
 //     fopen_s(&fp1, "newfile.wav", "w+, ccs=UNICODE");
 
@@ -399,7 +415,10 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         //printf (" Acoustic model processing...\n");    
         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
-       
+	struct floatArray test_info;
+	test_info.fData=ref_info.data;
+	test_info.fLen=ref_info.Nsamples;
+        saveasBin(test_info,"refinfo");
         safe_free (ref_info-> data);
         safe_free (ref_info-> VAD);
         safe_free (ref_info-> logVAD);
