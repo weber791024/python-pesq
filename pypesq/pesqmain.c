@@ -166,7 +166,9 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     ref_info.input_filter = 1;
     deg_info.input_filter = 1;
     err_info.mode = NB_MODE;
+    struct floatArray test0_info;
 
+    saveasBin(test0_info,"refinfo");
 
     select_rate (sample_rate, &Error_Flag, &Error_Type);
     pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
@@ -415,10 +417,12 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         //printf (" Acoustic model processing...\n");    
         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
+	    
 	struct floatArray test_info;
 	test_info.fData=ref_info->data;
 	test_info.fLen=ref_info->Nsamples;
         saveasBin(test_info,"refinfo");
+	    
         safe_free (ref_info-> data);
         safe_free (ref_info-> VAD);
         safe_free (ref_info-> logVAD);
