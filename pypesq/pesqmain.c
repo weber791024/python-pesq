@@ -289,18 +289,18 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
        load_src (Error_Flag, Error_Type, ref_info, ref_data, ref_n_samples, fs);
 
     }
-//     if ((*Error_Flag) == 0)
-//     {
-//        load_src (Error_Flag, Error_Type, deg_info, deg_data, deg_n_samples, fs);
-//     }
+    if ((*Error_Flag) == 0)
+    {
+       load_src (Error_Flag, Error_Type, deg_info, deg_data, deg_n_samples, fs);
+    }
 
-//     if (((ref_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4) ||
-//          (deg_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4)) &&
-//         ((*Error_Flag) == 0))
-//     {
-//         (*Error_Flag) = 2;
-//         (*Error_Type) = "Reference or Degraded below 1/4 second - processing stopped ";
-//     }
+    if (((ref_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4) ||
+         (deg_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4)) &&
+        ((*Error_Flag) == 0))
+    {
+        (*Error_Flag) = 2;
+        (*Error_Type) = "Reference or Degraded below 1/4 second - processing stopped ";
+    }
 
 //     if ((*Error_Flag) == 0)
 //     {
