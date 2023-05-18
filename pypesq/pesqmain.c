@@ -322,19 +322,19 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
                  ref_info->data + SEARCHBUFFER * Downsample,
                  ref_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
         }
-//         if( deg_info->input_filter == 1 ) {
-//             apply_filter (deg_info-> data, deg_info-> Nsamples, 26, standard_IRS_filter_dB);
-//         } else {
-//             for( i = 0; i < 16; i++ ) {
-//                 deg_info->data[SEARCHBUFFER * Downsample + i - 1]
-//                     *= (float)i / 16.0f;
-//                 deg_info->data[deg_info->Nsamples - SEARCHBUFFER * Downsample - i]
-//                     *= (float)i / 16.0f;
-//             }
-//             IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
-//                  deg_info->data + SEARCHBUFFER * Downsample,
-//                  deg_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
-//         }
+        if( deg_info->input_filter == 1 ) {
+            apply_filter (deg_info-> data, deg_info-> Nsamples, 26, standard_IRS_filter_dB);
+        } else {
+            for( i = 0; i < 16; i++ ) {
+                deg_info->data[SEARCHBUFFER * Downsample + i - 1]
+                    *= (float)i / 16.0f;
+                deg_info->data[deg_info->Nsamples - SEARCHBUFFER * Downsample - i]
+                    *= (float)i / 16.0f;
+            }
+            IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
+                 deg_info->data + SEARCHBUFFER * Downsample,
+                 deg_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
+        }
 
 //         model_ref = (float *) safe_malloc ((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
 //         model_deg = (float *) safe_malloc ((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
