@@ -309,19 +309,19 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
             WB_InIIR_Nsos = WB_InIIR_Nsos_8k;
             WB_InIIR_Hsos = WB_InIIR_Hsos_8k;
         }
-//         if( ref_info->input_filter == 1 ) {
-//             apply_filter (ref_info-> data, ref_info-> Nsamples, 26, standard_IRS_filter_dB);
-//         } else {
-//             for( i = 0; i < 16; i++ ) {
-//                 ref_info->data[SEARCHBUFFER * Downsample + i - 1]
-//                     *= (float)i / 16.0f;
-//                 ref_info->data[ref_info->Nsamples - SEARCHBUFFER * Downsample - i]
-//                     *= (float)i / 16.0f;
-//             }
-//             IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
-//                  ref_info->data + SEARCHBUFFER * Downsample,
-//                  ref_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
-//         }
+        if( ref_info->input_filter == 1 ) {
+            apply_filter (ref_info-> data, ref_info-> Nsamples, 26, standard_IRS_filter_dB);
+        } else {
+            for( i = 0; i < 16; i++ ) {
+                ref_info->data[SEARCHBUFFER * Downsample + i - 1]
+                    *= (float)i / 16.0f;
+                ref_info->data[ref_info->Nsamples - SEARCHBUFFER * Downsample - i]
+                    *= (float)i / 16.0f;
+            }
+            IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
+                 ref_info->data + SEARCHBUFFER * Downsample,
+                 ref_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
+        }
 //         if( deg_info->input_filter == 1 ) {
 //             apply_filter (deg_info-> data, deg_info-> Nsamples, 26, standard_IRS_filter_dB);
 //         } else {
