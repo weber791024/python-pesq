@@ -367,7 +367,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         safe_free (model_ref);
         safe_free (model_deg); 
     
-        if ((*Error_Flag) == 0) {
+        if ((*Error_Flag) == 99) {
             if (ref_info-> Nsamples < deg_info-> Nsamples) {
                 float *new_ref = (float *) safe_malloc((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
                 long  i;
