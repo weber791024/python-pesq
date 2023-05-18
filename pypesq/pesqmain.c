@@ -451,27 +451,6 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
                 exit (1);
             }
             end = ftell (resultsFile);
-
-            // if (start == end) {
-            //     f//printf (resultsFile, "REFERENCE\t DEGRADED\t PESQMOS\t MOSLQO\t SAMPLE_FREQ\t MODE\n"); 
-			// 	fflush (resultsFile);
-            // }
-
-            // f//printf (resultsFile, "%s\t ", ref_info-> path_name);
-            // f//printf (resultsFile, "%s\t ", deg_info-> path_name);
-
-			// f//printf (resultsFile, "%.3f\t ", err_info->pesq_mos);
-            // f//printf (resultsFile, "%.3f\t ", err_info->mapped_mos);
-            // f//printf (resultsFile, "%d\t", Fs);
-
-		// 	if ( err_info->mode == NB_MODE )
-		// 		f//printf (resultsFile, "nb");
-		// 	else
-		// 		f//printf (resultsFile, "wb");
-
-        //    f//printf (resultsFile, "\n", Fs);
-
-        //    fclose (resultsFile);
         }
 
     }
