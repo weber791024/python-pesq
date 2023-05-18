@@ -420,42 +420,42 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 			err_info->pesq_mos = -1.0;
 		}
 
-        if (resultsFile != NULL) {
-            long start, end;
+//         if (resultsFile != NULL) {
+//             long start, end;
 
-            if (0 != fseek (resultsFile, 0, SEEK_SET)) {
-                printf ("Could not move to start of results file %s!\n", ITU_RESULTS_FILE);
-                exit (1);
-            }
-            start = ftell (resultsFile);
+//             if (0 != fseek (resultsFile, 0, SEEK_SET)) {
+//                 printf ("Could not move to start of results file %s!\n", ITU_RESULTS_FILE);
+//                 exit (1);
+//             }
+//             start = ftell (resultsFile);
 
-            if (0 != fseek (resultsFile, 0, SEEK_END)) {
-                printf ("Could not move to end of results file %s!\n", ITU_RESULTS_FILE);
-                exit (1);
-            }
-            end = ftell (resultsFile);
+//             if (0 != fseek (resultsFile, 0, SEEK_END)) {
+//                 printf ("Could not move to end of results file %s!\n", ITU_RESULTS_FILE);
+//                 exit (1);
+//             }
+//             end = ftell (resultsFile);
 
-            // if (start == end) {
-            //     f//printf (resultsFile, "REFERENCE\t DEGRADED\t PESQMOS\t MOSLQO\t SAMPLE_FREQ\t MODE\n"); 
-			// 	fflush (resultsFile);
-            // }
+//             // if (start == end) {
+//             //     f//printf (resultsFile, "REFERENCE\t DEGRADED\t PESQMOS\t MOSLQO\t SAMPLE_FREQ\t MODE\n"); 
+// 			// 	fflush (resultsFile);
+//             // }
 
-            // f//printf (resultsFile, "%s\t ", ref_info-> path_name);
-            // f//printf (resultsFile, "%s\t ", deg_info-> path_name);
+//             // f//printf (resultsFile, "%s\t ", ref_info-> path_name);
+//             // f//printf (resultsFile, "%s\t ", deg_info-> path_name);
 
-			// f//printf (resultsFile, "%.3f\t ", err_info->pesq_mos);
-            // f//printf (resultsFile, "%.3f\t ", err_info->mapped_mos);
-            // f//printf (resultsFile, "%d\t", Fs);
+// 			// f//printf (resultsFile, "%.3f\t ", err_info->pesq_mos);
+//             // f//printf (resultsFile, "%.3f\t ", err_info->mapped_mos);
+//             // f//printf (resultsFile, "%d\t", Fs);
 
-		// 	if ( err_info->mode == NB_MODE )
-		// 		f//printf (resultsFile, "nb");
-		// 	else
-		// 		f//printf (resultsFile, "wb");
+// 		// 	if ( err_info->mode == NB_MODE )
+// 		// 		f//printf (resultsFile, "nb");
+// 		// 	else
+// 		// 		f//printf (resultsFile, "wb");
 
-        //    f//printf (resultsFile, "\n", Fs);
+//         //    f//printf (resultsFile, "\n", Fs);
 
-        //    fclose (resultsFile);
-        }
+//         //    fclose (resultsFile);
+//         }
 
     }
 
