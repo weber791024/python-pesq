@@ -276,6 +276,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 {
     float * ftmp = NULL;
     int i;
+
     ref_info-> data = NULL;
     ref_info-> VAD = NULL;
     ref_info-> logVAD = NULL;
@@ -417,12 +418,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         //printf (" Acoustic model processing...\n");    
         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
-	    
-	struct floatArray test_info;
-	test_info.fData=ref_info->data;
-	test_info.fLen=ref_info->Nsamples;
-        saveasBin(test_info,"refinfo");
-	    
+    
         safe_free (ref_info-> data);
         safe_free (ref_info-> VAD);
         safe_free (ref_info-> logVAD);
