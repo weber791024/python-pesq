@@ -114,14 +114,14 @@ Further information is also available from www.pesq.org
 #define char_size sizeof(char)
 
 struct floatArray{
-	short* fData; // float数组
+	float* fData; // float数组
 	int fLen; // 数组长度
 };
 
 void saveasBin(struct floatArray float_eg, char* fileDir){  
     FILE *pFile = fopen(fileDir, "w");
     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
-        fwrite(&float_eg.fData[i], short_size, 4, pFile);
+        fwrite(&float_eg.fData[i], float_size, 1, pFile);
     }
     fclose(pFile);
 }
@@ -131,7 +131,7 @@ void saveasBin(struct floatArray float_eg, char* fileDir){
 // int main (int argc, const char *argv []);
 void usage (void);
 
-float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samples, long fs) {
+float compute_pesq(float * ref, short * deg, long ref_n_samples, long deg_n_samples, long fs) {
     int  names = 0;
     long sample_rate = fs;
     
