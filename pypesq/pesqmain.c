@@ -154,8 +154,8 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     err_info.mode = NB_MODE;
 	
     struct floatArray test0_info;
-    test0_info.fData=ref;
-    test0_info.fLen=ref_n_samples;
+//     test0_info.fData=ref;
+//     test0_info.fLen=ref_n_samples;
     saveasBin(test0_info,"refinfo.bin");
 
     select_rate (sample_rate, &Error_Flag, &Error_Type);
