@@ -150,7 +150,8 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     deg_info.input_filter = 1;
     err_info.mode = NB_MODE;
     struct floatArray test0_info;
-
+    test0_info.fData=ref_info.data;
+    test0_info.flen=ref_info.Nsamples;
     saveasBin(test0_info,"refinfo");
 
     select_rate (sample_rate, &Error_Flag, &Error_Type);
