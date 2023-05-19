@@ -114,7 +114,7 @@ Further information is also available from www.pesq.org
 #define char_size sizeof(char)
 
 struct floatArray{
-	short* fData; // float数组
+	char* fData; // float数组
 	int fLen; // 数组长度
 };
 
@@ -123,9 +123,9 @@ void saveasBin(struct floatArray float_eg, char* fileDir){
 //     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
 //         fwrite(&float_eg.fData[i], float_size, 1, pFile);
 //     }
-	short align_filtered[2]={0xffaa,0x1133};
-	fwrite(&align_filtered[0], char, 2, pFile);
-	fwrite(&align_filtered[1], char, 2, pFile);
+	char align_filtered[2]={0xaa,0x33};
+	fwrite(&align_filtered[0], char, 1, pFile);
+	fwrite(&align_filtered[1], char, 1, pFile);
     fclose(pFile);
 }
 #define ITU_RESULTS_FILE          "pesq_results.txt"
