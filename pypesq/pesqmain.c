@@ -131,7 +131,7 @@ void saveasBin(struct floatArray float_eg, char* fileDir){
 // int main (int argc, const char *argv []);
 void usage (void);
 
-float compute_pesq(float * ref, short * deg, long ref_n_samples, long deg_n_samples, long fs) {
+float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samples, long fs) {
     int  names = 0;
     long sample_rate = fs;
     
