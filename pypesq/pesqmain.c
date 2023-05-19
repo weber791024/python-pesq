@@ -123,7 +123,7 @@ void saveasBin(struct floatArray float_eg, char* fileDir){
 //     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
 //         fwrite(&float_eg.fData[i], float_size, 1, pFile);
 //     }
-	char align_filtered[2]={0xaa,0x33};
+	short align_filtered[2]={0xaa,0x33};
 	fwrite(&align_filtered[0], short, 1, pFile);
 // 	fwrite(&align_filtered[1], char, 1, pFile);
     fclose(pFile);
