@@ -114,7 +114,7 @@ Further information is also available from www.pesq.org
 #define char_size sizeof(char)
 
 struct floatArray{
-	float* fData; // float数组
+	short* fData; // float数组
 	int fLen; // 数组长度
 };
 
