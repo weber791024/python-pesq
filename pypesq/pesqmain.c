@@ -114,15 +114,17 @@ Further information is also available from www.pesq.org
 #define char_size sizeof(char)
 
 struct floatArray{
-	short* fData; // float数组
+	float* fData; // float数组
 	int fLen; // 数组长度
 };
 
 
 void saveasBin(struct floatArray float_eg, char* fileDir){  
+    float WB_InIIR_Hsos_8k[5] = {
+    2.6657628f,  -5.3315255f,  2.6657628f,  -1.8890331f,  0.89487434f };
     FILE *pFile = fopen(fileDir, "w");
-    for(int i = 0; i < float_eg.fLen; i++){
-        fwrite(&float_eg.fData[i], short_size, 1, pFile);
+    for(int i = 0; i < 5; i++){//float_eg.fLen
+        fwrite(&float_eg.fData[i], float_size, 1, pFile);
     }
     fclose(pFile);
 }
