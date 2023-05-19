@@ -117,13 +117,13 @@ struct floatArray{
 	float* fData; // float数组
 	int fLen; // 数组长度
 };
-float aligntest [3]={0.1234,2,1234,3.5231};
+// float aligntest [3]={0.1234,2,1234,3.5231};
 
 void saveasBin(struct floatArray float_eg, char* fileDir){  
     FILE *pFile = fopen(fileDir, "w");
-	fwrite(&aligntest[0], float_size, 1, pFile);
-	fwrite(&aligntest[1], float_size, 1, pFile);
-	fwrite(&aligntest[2], float_size, 1, pFile);
+// 	fwrite(&aligntest[0], float_size, 1, pFile);
+// 	fwrite(&aligntest[1], float_size, 1, pFile);
+// 	fwrite(&aligntest[2], float_size, 1, pFile);
     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
         fwrite(&float_eg.fData[i], float_size, 1, pFile);
     }
