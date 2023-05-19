@@ -117,13 +117,9 @@ struct floatArray{
 	float* fData; // float数组
 	int fLen; // 数组长度
 };
-// float aligntest [3]={0.1234,2,1234,3.5231};
 
 void saveasBin(struct floatArray float_eg, char* fileDir){  
     FILE *pFile = fopen(fileDir, "w");
-// 	fwrite(&aligntest[0], float_size, 1, pFile);
-// 	fwrite(&aligntest[1], float_size, 1, pFile);
-// 	fwrite(&aligntest[2], float_size, 1, pFile);
     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
         fwrite(&float_eg.fData[i], float_size, 1, pFile);
     }
@@ -154,10 +150,10 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     deg_info.input_filter = 1;
     err_info.mode = NB_MODE;
 	
-    struct floatArray test0_info;
-    test0_info.fData=ref_info.data;
-    test0_info.fLen=ref_n_samples;
-    saveasBin(test0_info,"refinfo");
+//     struct floatArray test0_info;
+//     test0_info.fData=ref_info.data;
+//     test0_info.fLen=ref_n_samples;
+//     saveasBin(test0_info,"refinfo");
 
     select_rate (sample_rate, &Error_Flag, &Error_Type);
     pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
@@ -357,7 +353,10 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         calc_VAD (ref_info);
         calc_VAD (deg_info);
-        
+            struct floatArray test0_info;
+    test0_info.fData=ref_info.data;
+    test0_info.fLen=ref_info.Nsamples;
+    saveasBin(test0_info,"refinfo");
 //         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
 //         utterance_locate (ref_info, deg_info, err_info, ftmp);
