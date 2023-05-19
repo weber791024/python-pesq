@@ -117,13 +117,14 @@ struct floatArray{
 	float* fData; // float数组
 	int fLen; // 数组长度
 };
-
+float aligntest [3]={0.1234,2,1234,3.5231};
 
 void saveasBin(struct floatArray float_eg, char* fileDir){  
-    float WB_InIIR_Hsos_8k[5] = {
-    2.6657628f,  -5.3315255f,  2.6657628f,  -1.8890331f,  0.89487434f };
     FILE *pFile = fopen(fileDir, "w");
-    for(int i = 0; i < 5; i++){//float_eg.fLen
+	fwrite(&aligntest[0], float_size, 1, pFile);
+	fwrite(&aligntest[1], float_size, 1, pFile);
+	fwrite(&aligntest[2], float_size, 1, pFile);
+    for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
         fwrite(&float_eg.fData[i], float_size, 1, pFile);
     }
     fclose(pFile);
@@ -156,7 +157,7 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     struct floatArray test0_info;
     test0_info.fData=ref_info.data;
     test0_info.fLen=ref_n_samples;
-    saveasBin(test0_info,"refinfo.txt");
+    saveasBin(test0_info,"refinfo");
 
     select_rate (sample_rate, &Error_Flag, &Error_Type);
     pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
