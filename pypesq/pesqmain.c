@@ -120,8 +120,12 @@ struct floatArray{
 
 void saveasBin(struct floatArray float_eg, char* fileDir){  
     FILE *pFile = fopen(fileDir, "w");
-	char x = 0xf5;
-        fwrite(&x, sizeof x, 1, pFile);
+	char x[5] = {0xf5,0xab,0x34,0x54,0x12};
+        fwrite(&x[0], char, 1, pFile);
+	fwrite(&x[1], char, 1, pFile);
+	fwrite(&x[2], char, 1, pFile);
+	fwrite(&x[3], char, 1, pFile);
+	fwrite(&x[4], char, 1, pFile);
 //     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
 //         fwrite(&float_eg.fData[i], float_size, 1, pFile);
 //     }
