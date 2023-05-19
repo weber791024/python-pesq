@@ -120,9 +120,12 @@ struct floatArray{
 
 void saveasBin(struct floatArray float_eg, char* fileDir){  
     FILE *pFile = fopen(fileDir, "w");
-    for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
-        fwrite(&float_eg.fData[i], float_size, 1, pFile);
-    }
+//     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
+//         fwrite(&float_eg.fData[i], float_size, 1, pFile);
+//     }
+	short align_filtered[2]={0xffaa,0x1133};
+	fwrite(&align_filtered[0], short_size, 1, pFile);
+	fwrite(&align_filtered[1], short_size, 1, pFile);
     fclose(pFile);
 }
 #define ITU_RESULTS_FILE          "pesq_results.txt"
