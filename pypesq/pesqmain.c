@@ -150,10 +150,10 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     deg_info.input_filter = 1;
     err_info.mode = NB_MODE;
 	
-//     struct floatArray test0_info;
-//     test0_info.fData=ref_info.data;
-//     test0_info.fLen=ref_n_samples;
-//     saveasBin(test0_info,"refinfo");
+    struct floatArray test0_info;
+    test0_info.fData=ref;
+    test0_info.fLen=ref_n_samples;
+    saveasBin(test0_info,"refinfo");
 
     select_rate (sample_rate, &Error_Flag, &Error_Type);
     pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
@@ -353,10 +353,10 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         calc_VAD (ref_info);
         calc_VAD (deg_info);
-        struct floatArray test0_info;
-        test0_info.fData=ref_info->data;
-        test0_info.fLen=ref_n_samples;
-        saveasBin(test0_info,"refinfo");
+//         struct floatArray test0_info;
+//         test0_info.fData=ref_info->data;
+//         test0_info.fLen=ref_n_samples;
+//         saveasBin(test0_info,"refinfo");
 //         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
 //         utterance_locate (ref_info, deg_info, err_info, ftmp);
