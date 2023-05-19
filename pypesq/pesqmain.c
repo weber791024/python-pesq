@@ -124,8 +124,8 @@ void saveasBin(struct floatArray float_eg, char* fileDir){
 //         fwrite(&float_eg.fData[i], float_size, 1, pFile);
 //     }
 	short align_filtered[2]={0xffaa,0x1133};
-	fwrite(&align_filtered[0], short_size, 1, pFile);
-	fwrite(&align_filtered[1], short_size, 1, pFile);
+	fwrite(&align_filtered[0], short_size, 2, pFile);
+	fwrite(&align_filtered[1], short_size, 2, pFile);
     fclose(pFile);
 }
 #define ITU_RESULTS_FILE          "pesq_results.txt"
