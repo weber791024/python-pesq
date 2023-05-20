@@ -120,18 +120,9 @@ struct floatArray{
 
 void saveasBin(struct floatArray float_eg, char* fileDir){  
     FILE *pFile = fopen(fileDir, "w");
-	char x[5] = {0xf5,0xab,0x34,0x54,0x12};
-        fwrite(&x[0], sizeof(char), 1, pFile);
-	fwrite(&x[1], sizeof(char), 1, pFile);
-	fwrite(&x[2], sizeof(char), 1, pFile);
-	fwrite(&x[3], sizeof(char), 1, pFile);
-	fwrite(&x[4], sizeof(char), 1, pFile);
-//     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
-//         fwrite(&float_eg.fData[i], float_size, 1, pFile);
-//     }
-// 	short align_filtered[0]={0xaa33};
-// 	fwrite(&align_filtered[0], short, 1, pFile);
-// 	fwrite(&align_filtered[1], char, 1, pFile);
+    for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
+        fwrite(&float_eg.fData[i], float_size, 1, pFile);
+    }
     fclose(pFile);
 }
 #define ITU_RESULTS_FILE          "pesq_results.txt"
@@ -160,8 +151,11 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     err_info.mode = NB_MODE;
 	
     struct floatArray test0_info;
-//     test0_info.fData=ref;
-//     test0_info.fLen=ref_n_samples;
+    test0_info.fData[0]=11.1875;
+    test0_info.fData[1]=11.1875;
+    test0_info.fData[2]=11.1875;
+    test0_info.fData[3]=11.1875;
+    test0_info.fLen=4;
     saveasBin(test0_info,"refinfo.bin");
 
     select_rate (sample_rate, &Error_Flag, &Error_Type);
