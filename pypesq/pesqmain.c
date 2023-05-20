@@ -114,8 +114,8 @@ Further information is also available from www.pesq.org
 #define char_size sizeof(char)
 
 struct floatArray{
-	float* fData; // float数组
-	int fLen; // 数组长度
+	float* fData; // float單位
+	int fLen; // 單位長度
 };
 
 void saveasBin(struct floatArray float_eg, char* fileDir){  
