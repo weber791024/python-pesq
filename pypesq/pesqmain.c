@@ -147,11 +147,11 @@ void usage (void);
 float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samples, long fs) {
     int  names = 0;
     long sample_rate = fs;
-    struct shortArray ref_;
-	
-    ref_.fData= *ref;
-    ref_.fLen=ref_n_samples;
-    saveasShort(ref_,"ref_.raw");
+    
+//     struct shortArray ref_;	
+//     ref_.fData= *ref;
+//     ref_.fLen=ref_n_samples;
+//     saveasShort(ref_,"ref_.raw");
 	
     SIGNAL_INFO ref_info;
     SIGNAL_INFO deg_info;
