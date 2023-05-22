@@ -135,7 +135,7 @@ void saveasShort(short *short_eg,int sLen, char* fileDir){
     FILE *pFile = fopen(fileDir, "wb");
     for(int i = 0; i < sLen; i++){
         fwrite(&short_eg[i], short_size, 1, pFile);
-	printf ("%d\n",short_eg[i]);
+	printf ("%x\n",short_eg[i]);
     }
     fclose(pFile);
 }
