@@ -150,13 +150,13 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     deg_info.input_filter = 1;
     err_info.mode = NB_MODE;
 	
-    struct floatArray test0_info;
-    test0_info.fData[0]=11.1875;
-    test0_info.fData[1]=1.875;
-    test0_info.fData[2]=0.1875;
-    test0_info.fData[3]=9.175;
-    test0_info.fLen=4;
-    saveasBin(test0_info,"test0.bin");
+//     struct floatArray test0_info;
+//     test0_info.fData[0]=11.1875;
+//     test0_info.fData[1]=1.875;
+//     test0_info.fData[2]=0.1875;
+//     test0_info.fData[3]=9.175;
+//     test0_info.fLen=4;
+//     saveasBin(test0_info,"test0.bin");
 
     select_rate (sample_rate, &Error_Flag, &Error_Type);
     pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
@@ -356,11 +356,11 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         calc_VAD (ref_info);
         calc_VAD (deg_info);
-
+        printf ("test1\n");
         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
         utterance_locate (ref_info, deg_info, err_info, ftmp);
-    
+        printf ("test2\n");
         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
             ref_info-> data [i] = model_ref [i];
         }
