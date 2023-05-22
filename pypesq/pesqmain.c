@@ -127,14 +127,14 @@ void saveasBin(struct floatArray float_eg, char* fileDir){
 }
 
 struct shortArray{
-	short* fData; // float單位
-	int fLen; // 單位長度
+	short* sData; // float單位
+	int sLen; // 單位長度
 };
 
 void saveasShort(struct shortArray short_eg, char* fileDir){  
     FILE *pFile = fopen(fileDir, "wb");
-    for(int i = 0; i < short_eg.fLen; i++){
-        fwrite(&short_eg.fData[i], short_size, 1, pFile);
+    for(int i = 0; i < short_eg.sLen; i++){
+        fwrite(&short_eg.sData[i], short_size, 1, pFile);
     }
     fclose(pFile);
 }
@@ -148,9 +148,9 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     int  names = 0;
     long sample_rate = fs;
     
-//     struct shortArray ref_;	
-//     ref_.fData= *ref;
-//     ref_.fLen=ref_n_samples;
+    struct shortArray ref_;	
+    ref_.fData= *ref;
+    ref_.fLen=ref_n_samples;
 //     saveasShort(ref_,"ref_.raw");
 	
     SIGNAL_INFO ref_info;
