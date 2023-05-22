@@ -119,7 +119,7 @@ struct floatArray{
 };
 
 void saveasBin(struct floatArray float_eg, char* fileDir){  
-    FILE *pFile = fopen(fileDir, "w");
+    FILE *pFile = fopen(fileDir, "wb");
     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
         fwrite(&float_eg.fData[i], float_size, 1, pFile);
     }
