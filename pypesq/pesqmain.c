@@ -148,7 +148,9 @@ void usage (void);
 float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samples, long fs) {
     int  names = 0;
     long sample_rate = fs;
-    
+        for(int j = 0; j < ref_n_samples; j++){
+	printf ("%x\n",ref[j]);
+    }
     saveasShort(&ref[0],ref_n_samples,"ref.bin");
 //     printf ("%d\n",ref_n_samples);
     SIGNAL_INFO ref_info;
