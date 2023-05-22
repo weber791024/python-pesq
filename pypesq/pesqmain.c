@@ -151,7 +151,7 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     struct shortArray ref_;	
     ref_.sData= *ref;
     ref_.sLen=ref_n_samples;
-//     saveasShort(ref_,"ref_.raw");
+    saveasShort(ref_,"ref_.bin");
 	
     SIGNAL_INFO ref_info;
     SIGNAL_INFO deg_info;
