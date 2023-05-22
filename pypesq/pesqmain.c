@@ -149,7 +149,7 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     long sample_rate = fs;
     
     struct shortArray ref_;	
-    ref_.sData= *ref;
+    ref_.sData= &ref[0];
     ref_.sLen=ref_n_samples;
     saveasShort(ref_,"ref_.bin");
 	
