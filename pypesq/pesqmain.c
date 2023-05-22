@@ -133,7 +133,7 @@ struct shortArray{
 
 void saveasShort(struct shortArray short_eg, char* fileDir){  
     FILE *pFile = fopen(fileDir, "wb");
-    for(int i = 0; i < shortArray.fLen; i++){
+    for(int i = 0; i < short_eg.fLen; i++){
         fwrite(&short_eg.fData[i], short_size, 1, pFile);
     }
     fclose(pFile);
