@@ -131,7 +131,7 @@ void saveasBin(struct floatArray float_eg, char* fileDir){
 // 	int sLen; // 單位長度
 // };
 
-void saveasShort(short *short_eg, sLen, char* fileDir){  
+void saveasShort(short *short_eg,long sLen, char* fileDir){  
     FILE *pFile = fopen(fileDir, "wb");
     for(int i = 0; i < sLen; i++){
         fwrite(short_eg[i], short_size, 1, pFile);
