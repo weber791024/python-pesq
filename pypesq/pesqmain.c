@@ -148,7 +148,7 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     int  names = 0;
     long sample_rate = fs;
     
-    saveasShort(ref[0],ref_n_samples,"ref.bin");
+    saveasShort(&ref[0],ref_n_samples,"ref.bin");
     printf ("%d\n",ref_n_samples);
     SIGNAL_INFO ref_info;
     SIGNAL_INFO deg_info;
