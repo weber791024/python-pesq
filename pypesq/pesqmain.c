@@ -157,7 +157,7 @@ float compute_pesq(float * ref, short * deg, long ref_n_samples, long deg_n_samp
     char * Error_Type = "Unknown error type.";
 	
            struct floatArray ref_infof;
-           ref_infof.fData= *ref;
+           ref_infof.fData= ref;
            ref_infof.fLen=ref_n_samples;
            saveasBin(ref_infof,"src_ref_info.raw");
 	
