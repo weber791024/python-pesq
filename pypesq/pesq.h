@@ -282,8 +282,8 @@ void apply_pesq(float *x_data, float *ref_surf,
                 float *y_data, float *deg_surf, long NVAD_windows, float *ftmp,
                 ERROR_INFO *err_info);
 void pesq_measure(SIGNAL_INFO *ref_info, SIGNAL_INFO *deg_info,
-                  ERROR_INFO *err_info, long *Error_Flag, char **Error_Type, float *ref_data, short *deg_data, long ref_n_samples, long deg_n_samples, long fs);
-float compute_pesq(float *ref, short *deg, long ref_n_samples, long deg_n_samples, long fs);
+                  ERROR_INFO *err_info, long *Error_Flag, char **Error_Type, short *ref_data, short *deg_data, long ref_n_samples, long deg_n_samples, long fs);
+float compute_pesq(short *ref, short *deg, long ref_n_samples, long deg_n_samples, long fs);
 
 #define D_POW_F 2
 #define D_POW_S 6
