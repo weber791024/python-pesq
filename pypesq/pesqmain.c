@@ -89,7 +89,7 @@ AGREEMENT. PESQ PATENT-ONLY LICENSE AGREEMENTS MAY BE OBTAINED FROM OPTICOM.
 
 
 ***********************************************************************
-*  OPTICOM GmbH                    *  Psytechnics Limited             
+*  OPTICOM GmbH                    *  Psytechnics Limited             *
 *  Naegelsbachstr. 38,             *  Fraser House, 23 Museum Street, *
 *  D- 91052 Erlangen, Germany      *  Ipswich IP1 1HN, England        *
 *  Phone: +49 (0) 9131 53020 0     *  Phone: +44 (0) 1473 261 800     *
@@ -104,63 +104,27 @@ Further information is also available from www.pesq.org
 *****************************************************************************/
 
 #include <stdio.h>
-#include <stdint.h>
 #include <math.h>
 #include "pesq.h"
 #include "dsp.h"
 
-#define float_size sizeof(float)
-#define short_size sizeof(short)
-#define char_size sizeof(char)
-
-struct floatArray{
-	float* fData; // float單位
-	int fLen; // 單位長度
-};
-
-void saveasBin(struct floatArray float_eg, char* fileDir){  
-    FILE *pFile = fopen(fileDir, "wb");
-    for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
-        fwrite(&float_eg.fData[i], float_size, 1, pFile);
-    }
-    fclose(pFile);
-}
-
-// struct shortArray{
-// 	short* sData; // float單位
-// 	int sLen; // 單位長度
-// };
-
-// void saveasShort(short *short_eg,int sLen, char* fileDir){  
-//     FILE *pFile = fopen(fileDir, "wb");
-//     for(int i = 0; i < sLen; i++){
-//         fwrite(&short_eg[i], short_size, 1, pFile);
-// 	printf ("%x\n",short_eg[i]);
-//     }
-//     fclose(pFile);
-// }
 #define ITU_RESULTS_FILE          "pesq_results.txt"
-#define  W  128
+
 
 // int main (int argc, const char *argv []);
 void usage (void);
 
-float compute_pesq(float * ref, short * deg, long ref_n_samples, long deg_n_samples, long fs) {
+float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samples, long fs) {
     int  names = 0;
     long sample_rate = fs;
-
+    
     SIGNAL_INFO ref_info;
     SIGNAL_INFO deg_info;
     ERROR_INFO err_info;
-    printf ("Weber791024\n");
+
     long Error_Flag = 0;
     char * Error_Type = "Unknown error type.";
-	
-//            struct floatArray ref_infof;
-//            ref_infof.fData= ref;
-//            ref_infof.fLen=ref_n_samples;
-//            saveasBin(ref_infof,"src_ref_info.raw");
-	
+
     strcpy (ref_info.path_name, "");
     ref_info.apply_swap = 0;
     strcpy (deg_info.path_name, "");
@@ -168,14 +132,7 @@ float compute_pesq(float * ref, short * deg, long ref_n_samples, long deg_n_samp
     ref_info.input_filter = 1;
     deg_info.input_filter = 1;
     err_info.mode = NB_MODE;
-	
-//     struct floatArray test0_info;
-//     test0_info.fData[0]=11.1875;
-//     test0_info.fData[1]=1.875;
-//     test0_info.fData[2]=0.1875;
-//     test0_info.fData[3]=9.175;
-//     test0_info.fLen=4;
-//     saveasBin(test0_info,"test0.bin");
+
 
     select_rate (sample_rate, &Error_Flag, &Error_Type);
     pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
@@ -279,7 +236,7 @@ float WB_InIIR_Hsos_16k[LINIIR] = {
     2.740826f,  -5.4816519f,  2.740826f,  -1.9444777f,  0.94597794f };
        
 void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
-    ERROR_INFO * err_info, long * Error_Flag, char ** Error_Type, float* ref_data, short* deg_data, long ref_n_samples, long deg_n_samples, long fs)
+    ERROR_INFO * err_info, long * Error_Flag, char ** Error_Type, short* ref_data, short* deg_data, long ref_n_samples, long deg_n_samples, long fs)
 {
     float * ftmp = NULL;
     int i;
@@ -301,17 +258,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     {
        load_src (Error_Flag, Error_Type, deg_info, deg_data, deg_n_samples, fs);
     }
-//            struct floatArray ref_infof;
-//            ref_infof.fData=ref_info->data;
-//            ref_infof.fLen=ref_n_samples;
-//            saveasBin(ref_infof,"src_ref_info.raw");
-// 	   struct floatArray deg_infof;
-//            deg_infof.fData=deg_info->data;
-//            deg_infof.fLen=deg_n_samples;
-//            saveasBin(deg_infof,"src_deg_info.raw");
-	printf ("load finish\n");
-	printf ("src_ref_info len: %d\n",ref_n_samples);
-	printf ("src_deg_info len: %d\n",deg_n_samples);
+
     if (((ref_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4) ||
          (deg_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4)) &&
         ((*Error_Flag) == 0))
@@ -385,16 +332,11 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         calc_VAD (ref_info);
         calc_VAD (deg_info);
-	   struct floatArray ref_infof;
-           ref_infof.fData=ref_info->data;
-           ref_infof.fLen=ref_n_samples;
-           saveasBin(ref_infof,"src_ref_info1.raw");    
-	    
-//         printf ("test1\n");
+        
         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
         utterance_locate (ref_info, deg_info, err_info, ftmp);
-//         printf ("test2\n");
+    
         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
             ref_info-> data [i] = model_ref [i];
         }
@@ -440,16 +382,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         //printf (" Acoustic model processing...\n");    
         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
-	    
-//            struct floatArray ref_infof;
-//            ref_infof.fData=ref_info->data;
-//            ref_infof.fLen=ref_n_samples;
-//            saveasBin(ref_infof,"refinfo.bin");
-// 	   struct floatArray deg_infof;
-//            deg_infof.fData=deg_info->data;
-//            deg_infof.fLen=deg_n_samples;
-//            saveasBin(deg_infof,"deg_info.bin");
-	    
+    
         safe_free (ref_info-> data);
         safe_free (ref_info-> VAD);
         safe_free (ref_info-> logVAD);
