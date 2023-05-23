@@ -131,21 +131,21 @@ void saveasBin(struct floatArray float_eg, char* fileDir){
 // 	int sLen; // 單位長度
 // };
 
-void saveasShort(short *short_eg,int sLen, char* fileDir){  
-    FILE *pFile = fopen(fileDir, "wb");
-    for(int i = 0; i < sLen; i++){
-        fwrite(&short_eg[i], short_size, 1, pFile);
-	printf ("%x\n",short_eg[i]);
-    }
-    fclose(pFile);
-}
+// void saveasShort(short *short_eg,int sLen, char* fileDir){  
+//     FILE *pFile = fopen(fileDir, "wb");
+//     for(int i = 0; i < sLen; i++){
+//         fwrite(&short_eg[i], short_size, 1, pFile);
+// 	printf ("%x\n",short_eg[i]);
+//     }
+//     fclose(pFile);
+// }
 #define ITU_RESULTS_FILE          "pesq_results.txt"
 #define  W  128
 
 // int main (int argc, const char *argv []);
 void usage (void);
 
-float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samples, long fs) {
+float compute_pesq(float * ref, short * deg, long ref_n_samples, long deg_n_samples, long fs) {
     int  names = 0;
     long sample_rate = fs;
 
@@ -156,10 +156,10 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
     long Error_Flag = 0;
     char * Error_Type = "Unknown error type.";
 	
-//            struct floatArray ref_infof;
-//            ref_infof.fData= ref;
-//            ref_infof.fLen=ref_n_samples;
-//            saveasBin(ref_infof,"src_ref_info.raw");
+           struct floatArray ref_infof;
+           ref_infof.fData= ref;
+           ref_infof.fLen=ref_n_samples;
+           saveasBin(ref_infof,"src_ref_info.raw");
 	
     strcpy (ref_info.path_name, "");
     ref_info.apply_swap = 0;
@@ -177,8 +177,8 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
 //     test0_info.fLen=4;
 //     saveasBin(test0_info,"test0.bin");
 
-    select_rate (sample_rate, &Error_Flag, &Error_Type);
-    pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
+//     select_rate (sample_rate, &Error_Flag, &Error_Type);
+//     pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
 
     float pesq_score = err_info.pesq_mos;
     return pesq_score;
