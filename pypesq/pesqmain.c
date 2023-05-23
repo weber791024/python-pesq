@@ -148,11 +148,7 @@ void usage (void);
 float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samples, long fs) {
     int  names = 0;
     long sample_rate = fs;
-        for(int j = 0; j < ref_n_samples; j++){
-	printf ("%x\n",ref[j]);
-    }
-    saveasShort(&ref[0],ref_n_samples,"ref.bin");
-//     printf ("%d\n",ref_n_samples);
+
     SIGNAL_INFO ref_info;
     SIGNAL_INFO deg_info;
     ERROR_INFO err_info;
@@ -176,8 +172,8 @@ float compute_pesq(short * ref, short * deg, long ref_n_samples, long deg_n_samp
 //     test0_info.fLen=4;
 //     saveasBin(test0_info,"test0.bin");
 
-//     select_rate (sample_rate, &Error_Flag, &Error_Type);
-//     pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
+    select_rate (sample_rate, &Error_Flag, &Error_Type);
+    pesq_measure (&ref_info, &deg_info, &err_info, &Error_Flag, &Error_Type, ref, deg, ref_n_samples, deg_n_samples, fs);
 
     float pesq_score = err_info.pesq_mos;
     return pesq_score;
@@ -300,7 +296,15 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     {
        load_src (Error_Flag, Error_Type, deg_info, deg_data, deg_n_samples, fs);
     }
-
+           struct floatArray ref_infof;
+           ref_infof.fData=ref_info->data;
+           ref_infof.fLen=ref_n_samples;
+           saveasBin(ref_infof,"src_ref_info.raw");
+	   struct floatArray deg_infof;
+           deg_infof.fData=deg_info->data;
+           deg_infof.fLen=deg_n_samples;
+           saveasBin(deg_infof,"src_deg_info.raw");
+	printf ("load finish\n");
     if (((ref_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4) ||
          (deg_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4)) &&
         ((*Error_Flag) == 0))
@@ -374,11 +378,11 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         calc_VAD (ref_info);
         calc_VAD (deg_info);
-        printf ("test1\n");
+//         printf ("test1\n");
         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
         utterance_locate (ref_info, deg_info, err_info, ftmp);
-        printf ("test2\n");
+//         printf ("test2\n");
         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
             ref_info-> data [i] = model_ref [i];
         }
