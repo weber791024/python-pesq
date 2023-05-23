@@ -305,6 +305,8 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
            deg_infof.fLen=deg_n_samples;
            saveasBin(deg_infof,"src_deg_info.raw");
 	printf ("load finish\n");
+	printf ("src_ref_info len: %d\n",ref_n_samples);
+	printf ("src_deg_info len: %d\n",deg_n_samples);
     if (((ref_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4) ||
          (deg_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4)) &&
         ((*Error_Flag) == 0))
