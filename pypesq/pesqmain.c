@@ -279,7 +279,7 @@ float WB_InIIR_Hsos_16k[LINIIR] = {
     2.740826f,  -5.4816519f,  2.740826f,  -1.9444777f,  0.94597794f };
        
 void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
-    ERROR_INFO * err_info, long * Error_Flag, char ** Error_Type, short* ref_data, short* deg_data, long ref_n_samples, long deg_n_samples, long fs)
+    ERROR_INFO * err_info, long * Error_Flag, char ** Error_Type, float* ref_data, short* deg_data, long ref_n_samples, long deg_n_samples, long fs)
 {
     float * ftmp = NULL;
     int i;
