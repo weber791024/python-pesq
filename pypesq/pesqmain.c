@@ -125,6 +125,17 @@ void saveasBin(struct floatArray float_eg, char* fileDir){
     fclose(pFile);
 }
 
+struct shortArray{
+	short* sData; // float單位
+	int sLen; // 單位長度
+};
+void saveasBin(struct shortArray short_eg, char* fileDir){  
+    FILE *pFile = fopen(fileDir, "wb");
+//     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
+        fwrite(short_eg.sData, short_size, (short_eg.sLen), pFile);
+//     }
+    fclose(pFile);
+}
 #define ITU_RESULTS_FILE          "pesq_results.txt"
 
 
@@ -273,6 +284,11 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
            ref_infof.fData=ref_info->data;
            ref_infof.fLen=ref_n_samples;
            saveasBin(ref_infof,"src_ref_info.raw");
+	    
+	   struct floatArray ref_infof;
+           ref_infof.sData=ref_data;
+           ref_infof.sLen=ref_n_samples;
+           saveasBin(ref_data,"src_ref_data.raw");
     }
 	
     if ((*Error_Flag) == 0)
