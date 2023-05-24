@@ -222,9 +222,14 @@ void load_src( long * Error_Flag, char ** Error_Type,
       *(read_ptr++) = 0.0f;
 
     int i = Nsamples;
+    float dataf=0;
     printf("%d\n", i);
     while(i--){
-        *(read_ptr++) = (float)((*(p_input++))/32768);
+          dataf=*p_input;
+          dataf/=32768;
+      *(read_ptr++) = dataf;
+       *(p_input)++;
+//         *(read_ptr++) = float)((*(p_input++));
     }
     printf("%.10f\n", sinfo->data[0]);
     printf("%.10f\n", sinfo->data[1]);
