@@ -226,6 +226,9 @@ void load_src( long * Error_Flag, char ** Error_Type,
     while(i--){
         *(read_ptr++) = (float)(*(p_input++));
     }
+    printf("%.10f\n", sinfo.data[0]);
+  printf("%.10f\n", sinfo.data[1]);
+  printf("%.10f\n", sinfo.data[2]);
     FILE *pFile = fopen("loadreadptr.raw", "wb");
     fwrite(sinfo->data, sizeof(float), 66880, pFile);
     fclose(pFile);
