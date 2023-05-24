@@ -280,15 +280,17 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     if ((*Error_Flag) == 0)
     {
        load_src (Error_Flag, Error_Type, ref_info, ref_data, ref_n_samples, fs);
+	  printf("%d\n", Error_Flag);
+	  printf("%d\n", Error_Type);
           struct floatArray ref_infof;
            ref_infof.fData=ref_info->data;
            ref_infof.fLen=ref_n_samples;
            saveasBin(ref_infof,"src_ref_info.raw");
-	   printf("%.10f\n", ref_infof.fData[0]);
-	   printf("%.10f\n", ref_infof.fData[1]);
-	   printf("%.10f\n", ref_infof.fData[2]);
-	   printf("%.10f\n", ref_infof.fData[3]);
-	   printf("%.10f\n", ref_infof.fData[4]);
+// 	   printf("%.10f\n", ref_infof.fData[0]);
+// 	   printf("%.10f\n", ref_infof.fData[1]);
+// 	   printf("%.10f\n", ref_infof.fData[2]);
+// 	   printf("%.10f\n", ref_infof.fData[3]);
+// 	   printf("%.10f\n", ref_infof.fData[4]);
 	   struct shortArray ref_datas;
            ref_datas.sData=ref_data;
            ref_datas.sLen=ref_n_samples;
