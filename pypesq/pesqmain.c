@@ -276,162 +276,162 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
        load_src (Error_Flag, Error_Type, deg_info, deg_data, deg_n_samples, fs);
     }
 
-    if (((ref_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4) ||
-         (deg_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4)) &&
-        ((*Error_Flag) == 0))
-    {
-        (*Error_Flag) = 2;
-        (*Error_Type) = "Reference or Degraded below 1/4 second - processing stopped ";
-    }
+//     if (((ref_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4) ||
+//          (deg_info-> Nsamples - 2 * SEARCHBUFFER * Downsample < Fs / 4)) &&
+//         ((*Error_Flag) == 0))
+//     {
+//         (*Error_Flag) = 2;
+//         (*Error_Type) = "Reference or Degraded below 1/4 second - processing stopped ";
+//     }
 
-    if ((*Error_Flag) == 0)
-    {
-        alloc_other (ref_info, deg_info, Error_Flag, Error_Type, &ftmp);
-    }
+//     if ((*Error_Flag) == 0)
+//     {
+//         alloc_other (ref_info, deg_info, Error_Flag, Error_Type, &ftmp);
+//     }
 
-    if ((*Error_Flag) == 0)
-    {   
-        int     maxNsamples = max (ref_info-> Nsamples, deg_info-> Nsamples);
-        float * model_ref; 
-        float * model_deg; 
-        long    i;
-        FILE *resultsFile;
+//     if ((*Error_Flag) == 0)
+//     {   
+//         int     maxNsamples = max (ref_info-> Nsamples, deg_info-> Nsamples);
+//         float * model_ref; 
+//         float * model_deg; 
+//         long    i;
+//         FILE *resultsFile;
 
-        fix_power_level (ref_info, "reference", maxNsamples);
-        fix_power_level (deg_info, "degraded", maxNsamples);
+//         fix_power_level (ref_info, "reference", maxNsamples);
+//         fix_power_level (deg_info, "degraded", maxNsamples);
 
-        if( Fs == 16000 ) {
-            WB_InIIR_Nsos = WB_InIIR_Nsos_16k;
-            WB_InIIR_Hsos = WB_InIIR_Hsos_16k;
-        } else {
-            WB_InIIR_Nsos = WB_InIIR_Nsos_8k;
-            WB_InIIR_Hsos = WB_InIIR_Hsos_8k;
-        }
-        if( ref_info->input_filter == 1 ) {
-            apply_filter (ref_info-> data, ref_info-> Nsamples, 26, standard_IRS_filter_dB);
-        } else {
-            for( i = 0; i < 16; i++ ) {
-                ref_info->data[SEARCHBUFFER * Downsample + i - 1]
-                    *= (float)i / 16.0f;
-                ref_info->data[ref_info->Nsamples - SEARCHBUFFER * Downsample - i]
-                    *= (float)i / 16.0f;
-            }
-            IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
-                 ref_info->data + SEARCHBUFFER * Downsample,
-                 ref_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
-        }
-        if( deg_info->input_filter == 1 ) {
-            apply_filter (deg_info-> data, deg_info-> Nsamples, 26, standard_IRS_filter_dB);
-        } else {
-            for( i = 0; i < 16; i++ ) {
-                deg_info->data[SEARCHBUFFER * Downsample + i - 1]
-                    *= (float)i / 16.0f;
-                deg_info->data[deg_info->Nsamples - SEARCHBUFFER * Downsample - i]
-                    *= (float)i / 16.0f;
-            }
-            IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
-                 deg_info->data + SEARCHBUFFER * Downsample,
-                 deg_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
-        }
+//         if( Fs == 16000 ) {
+//             WB_InIIR_Nsos = WB_InIIR_Nsos_16k;
+//             WB_InIIR_Hsos = WB_InIIR_Hsos_16k;
+//         } else {
+//             WB_InIIR_Nsos = WB_InIIR_Nsos_8k;
+//             WB_InIIR_Hsos = WB_InIIR_Hsos_8k;
+//         }
+//         if( ref_info->input_filter == 1 ) {
+//             apply_filter (ref_info-> data, ref_info-> Nsamples, 26, standard_IRS_filter_dB);
+//         } else {
+//             for( i = 0; i < 16; i++ ) {
+//                 ref_info->data[SEARCHBUFFER * Downsample + i - 1]
+//                     *= (float)i / 16.0f;
+//                 ref_info->data[ref_info->Nsamples - SEARCHBUFFER * Downsample - i]
+//                     *= (float)i / 16.0f;
+//             }
+//             IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
+//                  ref_info->data + SEARCHBUFFER * Downsample,
+//                  ref_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
+//         }
+//         if( deg_info->input_filter == 1 ) {
+//             apply_filter (deg_info-> data, deg_info-> Nsamples, 26, standard_IRS_filter_dB);
+//         } else {
+//             for( i = 0; i < 16; i++ ) {
+//                 deg_info->data[SEARCHBUFFER * Downsample + i - 1]
+//                     *= (float)i / 16.0f;
+//                 deg_info->data[deg_info->Nsamples - SEARCHBUFFER * Downsample - i]
+//                     *= (float)i / 16.0f;
+//             }
+//             IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
+//                  deg_info->data + SEARCHBUFFER * Downsample,
+//                  deg_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
+//         }
 
-        model_ref = (float *) safe_malloc ((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
-        model_deg = (float *) safe_malloc ((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
+//         model_ref = (float *) safe_malloc ((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
+//         model_deg = (float *) safe_malloc ((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
 
-        for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-            model_ref [i] = ref_info-> data [i];
-        }
+//         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//             model_ref [i] = ref_info-> data [i];
+//         }
     
-        for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-            model_deg [i] = deg_info-> data [i];
-        }
+//         for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//             model_deg [i] = deg_info-> data [i];
+//         }
     
-        input_filter( ref_info, deg_info, ftmp );
+//         input_filter( ref_info, deg_info, ftmp );
 
-        calc_VAD (ref_info);
-        calc_VAD (deg_info);
+//         calc_VAD (ref_info);
+//         calc_VAD (deg_info);
         
-        crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
+//         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
-        utterance_locate (ref_info, deg_info, err_info, ftmp);
+//         utterance_locate (ref_info, deg_info, err_info, ftmp);
     
-        for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-            ref_info-> data [i] = model_ref [i];
-        }
+//         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//             ref_info-> data [i] = model_ref [i];
+//         }
     
-        for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-            deg_info-> data [i] = model_deg [i];
-        }
+//         for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//             deg_info-> data [i] = model_deg [i];
+//         }
 
-        safe_free (model_ref);
-        safe_free (model_deg); 
+//         safe_free (model_ref);
+//         safe_free (model_deg); 
     
-        if ((*Error_Flag) == 0) {
-            if (ref_info-> Nsamples < deg_info-> Nsamples) {
-                float *new_ref = (float *) safe_malloc((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
-                long  i;
-                for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                    new_ref [i] = ref_info-> data [i];
-                }
-                for (i = ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
-                     i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                    new_ref [i] = 0.0f;
-                }
-                safe_free (ref_info-> data);
-                ref_info-> data = new_ref;
-                new_ref = NULL;
-            } else {
-                if (ref_info-> Nsamples > deg_info-> Nsamples) {
-                    float *new_deg = (float *) safe_malloc((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
-                    long  i;
-                    for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                        new_deg [i] = deg_info-> data [i];
-                    }
-                    for (i = deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
-                         i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                        new_deg [i] = 0.0f;
-                    }
-                    safe_free (deg_info-> data);
-                    deg_info-> data = new_deg;
-                    new_deg = NULL;
-                }
-            }
-        }        
+//         if ((*Error_Flag) == 0) {
+//             if (ref_info-> Nsamples < deg_info-> Nsamples) {
+//                 float *new_ref = (float *) safe_malloc((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
+//                 long  i;
+//                 for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                     new_ref [i] = ref_info-> data [i];
+//                 }
+//                 for (i = ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
+//                      i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                     new_ref [i] = 0.0f;
+//                 }
+//                 safe_free (ref_info-> data);
+//                 ref_info-> data = new_ref;
+//                 new_ref = NULL;
+//             } else {
+//                 if (ref_info-> Nsamples > deg_info-> Nsamples) {
+//                     float *new_deg = (float *) safe_malloc((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
+//                     long  i;
+//                     for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                         new_deg [i] = deg_info-> data [i];
+//                     }
+//                     for (i = deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
+//                          i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                         new_deg [i] = 0.0f;
+//                     }
+//                     safe_free (deg_info-> data);
+//                     deg_info-> data = new_deg;
+//                     new_deg = NULL;
+//                 }
+//             }
+//         }        
 
-        //printf (" Acoustic model processing...\n");    
-        pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
+//         //printf (" Acoustic model processing...\n");    
+//         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
     
-        safe_free (ref_info-> data);
-        safe_free (ref_info-> VAD);
-        safe_free (ref_info-> logVAD);
-        safe_free (deg_info-> data);
-        safe_free (deg_info-> VAD);
-        safe_free (deg_info-> logVAD);
-        safe_free (ftmp);
+//         safe_free (ref_info-> data);
+//         safe_free (ref_info-> VAD);
+//         safe_free (ref_info-> logVAD);
+//         safe_free (deg_info-> data);
+//         safe_free (deg_info-> VAD);
+//         safe_free (deg_info-> logVAD);
+//         safe_free (ftmp);
 
-		if ( err_info->mode == NB_MODE )
-		{
-			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.4945f*err_info->pesq_mos+4.6607f)));
-		}
-		else
-		{
-			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.3669f*err_info->pesq_mos+3.8224f)));
-			err_info->pesq_mos = -1.0;
-		}
+// 		if ( err_info->mode == NB_MODE )
+// 		{
+// 			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.4945f*err_info->pesq_mos+4.6607f)));
+// 		}
+// 		else
+// 		{
+// 			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.3669f*err_info->pesq_mos+3.8224f)));
+// 			err_info->pesq_mos = -1.0;
+// 		}
 
-        if (resultsFile != NULL) {
-            long start, end;
+//         if (resultsFile != NULL) {
+//             long start, end;
 
-            if (0 != fseek (resultsFile, 0, SEEK_SET)) {
-                printf ("Could not move to start of results file %s!\n", ITU_RESULTS_FILE);
-                exit (1);
-            }
-            start = ftell (resultsFile);
+//             if (0 != fseek (resultsFile, 0, SEEK_SET)) {
+//                 printf ("Could not move to start of results file %s!\n", ITU_RESULTS_FILE);
+//                 exit (1);
+//             }
+//             start = ftell (resultsFile);
 
-            if (0 != fseek (resultsFile, 0, SEEK_END)) {
-                printf ("Could not move to end of results file %s!\n", ITU_RESULTS_FILE);
-                exit (1);
-            }
-            end = ftell (resultsFile);
+//             if (0 != fseek (resultsFile, 0, SEEK_END)) {
+//                 printf ("Could not move to end of results file %s!\n", ITU_RESULTS_FILE);
+//                 exit (1);
+//             }
+//             end = ftell (resultsFile);
 
             // if (start == end) {
             //     f//printf (resultsFile, "REFERENCE\t DEGRADED\t PESQMOS\t MOSLQO\t SAMPLE_FREQ\t MODE\n"); 
