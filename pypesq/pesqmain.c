@@ -325,7 +325,10 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         float * model_deg; 
         long    i;
         FILE *resultsFile;
-
+          struct floatArray ref_info328;
+           ref_info328.fData=ref_info->data;
+           ref_info328.fLen=ref_n_samples;
+           saveasBin(ref_info328,"ref_info328.raw");
         fix_power_level (ref_info, "reference", maxNsamples);
         fix_power_level (deg_info, "degraded", maxNsamples);
           struct floatArray ref_info331;
