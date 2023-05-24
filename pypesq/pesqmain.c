@@ -284,7 +284,11 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
            ref_infof.fData=ref_info->data;
            ref_infof.fLen=ref_n_samples;
            saveasBin(ref_infof,"src_ref_info.raw");
-	    
+	   printf("%.10f\n", ref_infof.fData[0]);
+	   printf("%.10f\n", ref_infof.fData[1]);
+	   printf("%.10f\n", ref_infof.fData[2]);
+	   printf("%.10f\n", ref_infof.fData[3]);
+	   printf("%.10f\n", ref_infof.fData[4]);
 	   struct shortArray ref_datas;
            ref_datas.sData=ref_data;
            ref_datas.sLen=ref_n_samples;
