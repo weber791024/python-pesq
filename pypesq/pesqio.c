@@ -203,7 +203,7 @@ void load_src( long * Error_Flag, char ** Error_Type,
     Fs = fs;
     Nsamples = n_samples;
     sinfo-> Nsamples = Nsamples + 2 * SEARCHBUFFER * Downsample;
-    printf("%d\n", sinfo-> Nsamples);
+    
     sinfo-> data =
         (float *) safe_malloc( (sinfo-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float) );
     if( sinfo-> data == NULL )
@@ -222,6 +222,7 @@ void load_src( long * Error_Flag, char ** Error_Type,
       *(read_ptr++) = 0.0f;
 
     int i = Nsamples;
+    printf("%d\n", i);
     while(i--){
         *(read_ptr++) = (float)(*(p_input++));
     }
