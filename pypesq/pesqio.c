@@ -224,7 +224,7 @@ void load_src( long * Error_Flag, char ** Error_Type,
     int i = Nsamples;
     printf("%d\n", i);
     while(i--){
-        *(read_ptr++) = (float)(*(p_input++));
+        *(read_ptr++) = (float)((*(p_input++))/32768);
     }
     printf("%.10f\n", sinfo->data[0]);
     printf("%.10f\n", sinfo->data[1]);
