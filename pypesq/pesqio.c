@@ -226,7 +226,9 @@ void load_src( long * Error_Flag, char ** Error_Type,
     while(i--){
         *(read_ptr++) = (float)(*(p_input++));
     }
-
+    FILE *pFile = fopen("loadreadptr.raw", "wb");
+    fwrite(sinfo->data, sizeof(float), 66880, pFile);
+    fclose(pFile);
     for( read_count = DATAPADDING_MSECS  * (Fs / 1000) + SEARCHBUFFER * Downsample;
          read_count > 0; read_count-- )
       *(read_ptr++) = 0.0f;
