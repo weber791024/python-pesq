@@ -320,15 +320,18 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
            saveasBin(ref_info317,"ref_info317.raw");
     if ((*Error_Flag) == 0)
     {   
-//         int     maxNsamples = max (ref_info-> Nsamples, deg_info-> Nsamples);
-//         float * model_ref; 
-//         float * model_deg; 
-//         long    i;
-//         FILE *resultsFile;
+        int     maxNsamples = max (ref_info-> Nsamples, deg_info-> Nsamples);
+        float * model_ref; 
+        float * model_deg; 
+        long    i;
+        FILE *resultsFile;
 
-//         fix_power_level (ref_info, "reference", maxNsamples);
-//         fix_power_level (deg_info, "degraded", maxNsamples);
-
+        fix_power_level (ref_info, "reference", maxNsamples);
+        fix_power_level (deg_info, "degraded", maxNsamples);
+          struct floatArray ref_info331;
+           ref_info331.fData=ref_info->data;
+           ref_info331.fLen=ref_n_samples;
+           saveasBin(ref_info331,"ref_info331.raw");
 //         if( Fs == 16000 ) {
 //             WB_InIIR_Nsos = WB_InIIR_Nsos_16k;
 //             WB_InIIR_Hsos = WB_InIIR_Hsos_16k;
