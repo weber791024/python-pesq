@@ -223,7 +223,7 @@ void load_src( long * Error_Flag, char ** Error_Type,
 
     int i = Nsamples;
     float dataf=0;
-    printf("%d\n", i);
+//     printf("%d\n", i);
     while(i--){
           dataf=*p_input;
           dataf/=32768;
