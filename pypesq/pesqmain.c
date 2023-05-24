@@ -249,12 +249,13 @@ void fix_power_level (SIGNAL_INFO *info, char *name, long maxNsamples)
                                         SEARCHBUFFER * Downsample, 
                                         n - SEARCHBUFFER * Downsample + DATAPADDING_MSECS  * (Fs / 1000),
                                         maxNsamples - 2 * SEARCHBUFFER * Downsample + DATAPADDING_MSECS  * (Fs / 1000));
-          struct floatArray ref_info252;
+	
+           struct floatArray ref_info252;
            ref_info252.fData=align_filtered;
            ref_info252.fLen=info-> Nsamples;
            saveasBin(ref_info252,"ref_info252.raw");
     global_scale = (float) sqrt (TARGET_AVG_POWER / power_above_300Hz); 
-   printf("%10.10f\n", global_scale);
+   printf("global_scale: %10.10f\n", global_scale);
     for (i = 0; i < n; i++) {
         info-> data [i] *= global_scale;    
     }
