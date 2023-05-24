@@ -239,7 +239,12 @@ void fix_power_level (SIGNAL_INFO *info, char *name, long maxNsamples)
         align_filtered [i] = info-> data [i];
     }
     apply_filter (align_filtered, info-> Nsamples, 26, align_filter_dB);
-
+    
+          struct floatArray ref_info243;
+           ref_info243.fData=align_filtered;
+           ref_info243.fLen=ref_n_samples;
+           saveasBin(ref_info243,"ref_info243.raw");	
+	
     power_above_300Hz = (float) pow_of (align_filtered, 
                                         SEARCHBUFFER * Downsample, 
                                         n - SEARCHBUFFER * Downsample + DATAPADDING_MSECS  * (Fs / 1000),
