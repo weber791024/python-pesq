@@ -280,8 +280,8 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     if ((*Error_Flag) == 0)
     {
        load_src (Error_Flag, Error_Type, ref_info, ref_data, ref_n_samples, fs);
-	  printf("%d\n", Error_Flag);
-	  printf("%d\n", Error_Type);
+// 	  printf("%d\n", Error_Flag);
+// 	  printf("%d\n", Error_Type);
           struct floatArray ref_infof;
            ref_infof.fData=ref_info->data;
            ref_infof.fLen=ref_n_samples;
