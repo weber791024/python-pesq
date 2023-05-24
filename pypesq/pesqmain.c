@@ -242,7 +242,7 @@ void fix_power_level (SIGNAL_INFO *info, char *name, long maxNsamples)
     
           struct floatArray ref_info243;
            ref_info243.fData=align_filtered;
-           ref_info243.fLen=ref_n_samples;
+           ref_info243.fLen=info-> Nsamples;
            saveasBin(ref_info243,"ref_info243.raw");	
 	
     power_above_300Hz = (float) pow_of (align_filtered, 
