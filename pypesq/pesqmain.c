@@ -374,7 +374,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
           struct floatArray ref_info374;
            ref_info374.fData=model_ref;
            ref_info374.fLen=ref_n_samples;
-           saveasBin(ref_info374,"ref_info331.raw");
+           saveasBin(ref_info374,"ref_info374.raw");
 //         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
 //             model_ref [i] = ref_info-> data [i];
 //         }
