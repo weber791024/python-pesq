@@ -231,14 +231,14 @@ void load_src( long * Error_Flag, char ** Error_Type,
        *(p_input)++;
 //         *(read_ptr++) = float)((*(p_input++));
     }
-    printf("%.10f\n", sinfo->data[0]);
-    printf("%.10f\n", sinfo->data[1]);
-    printf("%.10f\n", sinfo->data[2]);
+//     printf("%.10f\n", sinfo->data[0]);
+//     printf("%.10f\n", sinfo->data[1]);
+//     printf("%.10f\n", sinfo->data[2]);
   
-    printf("%d\n", data[0]);
-    printf("%d\n", data[1]);
-    printf("%d\n", data[2]);
-    FILE *pFile = fopen("loadreadptr.raw", "wb");
+//     printf("%d\n", data[0]);
+//     printf("%d\n", data[1]);
+//     printf("%d\n", data[2]);
+    FILE *pFile = fopen("ref_info241io.raw", "wb");
     fwrite(sinfo->data, sizeof(float), 66880, pFile);
     fclose(pFile);
     for( read_count = DATAPADDING_MSECS  * (Fs / 1000) + SEARCHBUFFER * Downsample;
