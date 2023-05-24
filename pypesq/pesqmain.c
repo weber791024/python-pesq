@@ -335,43 +335,46 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
            ref_info331.fData=ref_info->data;
            ref_info331.fLen=ref_n_samples;
            saveasBin(ref_info331,"ref_info331.raw");
-//         if( Fs == 16000 ) {
-//             WB_InIIR_Nsos = WB_InIIR_Nsos_16k;
-//             WB_InIIR_Hsos = WB_InIIR_Hsos_16k;
-//         } else {
-//             WB_InIIR_Nsos = WB_InIIR_Nsos_8k;
-//             WB_InIIR_Hsos = WB_InIIR_Hsos_8k;
-//         }
-//         if( ref_info->input_filter == 1 ) {
-//             apply_filter (ref_info-> data, ref_info-> Nsamples, 26, standard_IRS_filter_dB);
-//         } else {
-//             for( i = 0; i < 16; i++ ) {
-//                 ref_info->data[SEARCHBUFFER * Downsample + i - 1]
-//                     *= (float)i / 16.0f;
-//                 ref_info->data[ref_info->Nsamples - SEARCHBUFFER * Downsample - i]
-//                     *= (float)i / 16.0f;
-//             }
-//             IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
-//                  ref_info->data + SEARCHBUFFER * Downsample,
-//                  ref_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
-//         }
-//         if( deg_info->input_filter == 1 ) {
-//             apply_filter (deg_info-> data, deg_info-> Nsamples, 26, standard_IRS_filter_dB);
-//         } else {
-//             for( i = 0; i < 16; i++ ) {
-//                 deg_info->data[SEARCHBUFFER * Downsample + i - 1]
-//                     *= (float)i / 16.0f;
-//                 deg_info->data[deg_info->Nsamples - SEARCHBUFFER * Downsample - i]
-//                     *= (float)i / 16.0f;
-//             }
-//             IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
-//                  deg_info->data + SEARCHBUFFER * Downsample,
-//                  deg_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
-//         }
+        if( Fs == 16000 ) {
+            WB_InIIR_Nsos = WB_InIIR_Nsos_16k;
+            WB_InIIR_Hsos = WB_InIIR_Hsos_16k;
+        } else {
+            WB_InIIR_Nsos = WB_InIIR_Nsos_8k;
+            WB_InIIR_Hsos = WB_InIIR_Hsos_8k;
+        }
+        if( ref_info->input_filter == 1 ) {
+            apply_filter (ref_info-> data, ref_info-> Nsamples, 26, standard_IRS_filter_dB);
+        } else {
+            for( i = 0; i < 16; i++ ) {
+                ref_info->data[SEARCHBUFFER * Downsample + i - 1]
+                    *= (float)i / 16.0f;
+                ref_info->data[ref_info->Nsamples - SEARCHBUFFER * Downsample - i]
+                    *= (float)i / 16.0f;
+            }
+            IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
+                 ref_info->data + SEARCHBUFFER * Downsample,
+                 ref_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
+        }
+        if( deg_info->input_filter == 1 ) {
+            apply_filter (deg_info-> data, deg_info-> Nsamples, 26, standard_IRS_filter_dB);
+        } else {
+            for( i = 0; i < 16; i++ ) {
+                deg_info->data[SEARCHBUFFER * Downsample + i - 1]
+                    *= (float)i / 16.0f;
+                deg_info->data[deg_info->Nsamples - SEARCHBUFFER * Downsample - i]
+                    *= (float)i / 16.0f;
+            }
+            IIRFilt( WB_InIIR_Hsos, WB_InIIR_Nsos, NULL,
+                 deg_info->data + SEARCHBUFFER * Downsample,
+                 deg_info->Nsamples - 2 * SEARCHBUFFER * Downsample, NULL );
+        }
 
-//         model_ref = (float *) safe_malloc ((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
-//         model_deg = (float *) safe_malloc ((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
-
+        model_ref = (float *) safe_malloc ((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
+        model_deg = (float *) safe_malloc ((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
+          struct floatArray ref_info374;
+           ref_info374.fData=model_ref;
+           ref_info374.fLen=ref_n_samples;
+           saveasBin(ref_info374,"ref_info331.raw");
 //         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
 //             model_ref [i] = ref_info-> data [i];
 //         }
