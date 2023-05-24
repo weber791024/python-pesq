@@ -108,22 +108,22 @@ Further information is also available from www.pesq.org
 #include "pesq.h"
 #include "dsp.h"
 
-// #define float_size sizeof(float)
-// #define short_size sizeof(short)
-// #define char_size sizeof(char)
+#define float_size sizeof(float)
+#define short_size sizeof(short)
+#define char_size sizeof(char)
 
-// struct floatArray{
-// 	float* fData; // float單位
-// 	int fLen; // 單位長度
-// };
+struct floatArray{
+	float* fData; // float單位
+	int fLen; // 單位長度
+};
 
-// void saveasBin(struct floatArray float_eg, char* fileDir){  
-//     FILE *pFile = fopen(fileDir, "wb");
-//     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
-//         fwrite(&float_eg.fData[i], float_size, 1, pFile);
-//     }
-//     fclose(pFile);
-// }
+void saveasBin(struct floatArray float_eg, char* fileDir){  
+    FILE *pFile = fopen(fileDir, "wb");
+    for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
+        fwrite(&float_eg.fData[i], float_size, 1, pFile);
+    }
+    fclose(pFile);
+}
 
 #define ITU_RESULTS_FILE          "pesq_results.txt"
 
