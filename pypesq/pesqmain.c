@@ -269,8 +269,12 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     if ((*Error_Flag) == 0)
     {
        load_src (Error_Flag, Error_Type, ref_info, ref_data, ref_n_samples, fs);
-
+          struct floatArray ref_infof;
+           ref_infof.fData=ref_info->data;
+           ref_infof.fLen=ref_n_samples;
+           saveasBin(ref_infof,"src_ref_info.raw");
     }
+	
     if ((*Error_Flag) == 0)
     {
        load_src (Error_Flag, Error_Type, deg_info, deg_data, deg_n_samples, fs);
