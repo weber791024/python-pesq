@@ -253,16 +253,16 @@ void fix_power_level (SIGNAL_INFO *info, char *name, long maxNsamples)
            struct floatArray ref_info252;
            ref_info252.fData=align_filtered;
            ref_info252.fLen=info-> Nsamples;
-//            saveasBin(ref_info252,"ref_info252.raw");
+           saveasBin(ref_info252,"ref_info252.raw");
     global_scale = (float) sqrt (TARGET_AVG_POWER / power_above_300Hz); 
-//    printf("global_scale: %10.10f\n", global_scale);
+   printf("global_scale: %10.10f\n", global_scale);
     for (i = 0; i < n; i++) {
         info-> data [i] *= global_scale;    
     }
           struct floatArray ref_info261;
            ref_info261.fData=info-> data;
            ref_info261.fLen=info-> Nsamples;
-//            saveasBin(ref_info261,"ref_info261.raw");
+           saveasBin(ref_info261,"ref_info261.raw");
     safe_free (align_filtered);
 }
 
@@ -340,9 +340,9 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
               struct floatArray ref_info328;
               ref_info328.fData=ref_info->data;
               ref_info328.fLen=ref_n_samples;
-//               saveasBin(ref_info328,"ref_info328.raw");
-        fix_power_level (ref_info, "reference", maxNsamples);
-        fix_power_level (deg_info, "degraded", maxNsamples);
+              saveasBin(ref_info328,"ref_info328.raw");
+//         fix_power_level (ref_info, "reference", maxNsamples);
+//         fix_power_level (deg_info, "degraded", maxNsamples);
 //               struct floatArray ref_info331;
 //               ref_info331.fData=ref_info->data;
 //               ref_info331.fLen=ref_n_samples;
@@ -386,14 +386,14 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
              struct floatArray ref_info374;
              ref_info374.fData=model_ref;
              ref_info374.fLen=ref_n_samples;
-//              saveasBin(ref_info374,"ref_info374.raw");
+             saveasBin(ref_info374,"ref_info374.raw");
         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
             model_ref [i] = ref_info-> data [i];
         }
              struct floatArray ref_info381;
              ref_info381.fData=model_ref;
              ref_info381.fLen=ref_n_samples;
-//              saveasBin(ref_info381,"ref_info381.raw");
+             saveasBin(ref_info381,"ref_info381.raw");
         for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
             model_deg [i] = deg_info-> data [i];
         }
@@ -405,74 +405,74 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
              struct floatArray ref_info405;
              ref_info405.fData=model_ref;
              ref_info405.fLen=ref_n_samples;
-//              saveasBin(ref_info405,"ref_info405.raw");
-        crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
+             saveasBin(ref_info405,"ref_info405.raw");
+//         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
-        utterance_locate (ref_info, deg_info, err_info, ftmp);
+//         utterance_locate (ref_info, deg_info, err_info, ftmp);
     
-        for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-            ref_info-> data [i] = model_ref [i];
-        }
+//         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//             ref_info-> data [i] = model_ref [i];
+//         }
     
-        for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-            deg_info-> data [i] = model_deg [i];
-        }
+//         for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//             deg_info-> data [i] = model_deg [i];
+//         }
 
-        safe_free (model_ref);
-        safe_free (model_deg); 
+//         safe_free (model_ref);
+//         safe_free (model_deg); 
     
-        if ((*Error_Flag) == 0) {
-            if (ref_info-> Nsamples < deg_info-> Nsamples) {
-                float *new_ref = (float *) safe_malloc((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
-                long  i;
-                for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                    new_ref [i] = ref_info-> data [i];
-                }
-                for (i = ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
-                     i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                    new_ref [i] = 0.0f;
-                }
-                safe_free (ref_info-> data);
-                ref_info-> data = new_ref;
-                new_ref = NULL;
-            } else {
-                if (ref_info-> Nsamples > deg_info-> Nsamples) {
-                    float *new_deg = (float *) safe_malloc((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
-                    long  i;
-                    for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                        new_deg [i] = deg_info-> data [i];
-                    }
-                    for (i = deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
-                         i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                        new_deg [i] = 0.0f;
-                    }
-                    safe_free (deg_info-> data);
-                    deg_info-> data = new_deg;
-                    new_deg = NULL;
-                }
-            }
-        }        
+//         if ((*Error_Flag) == 0) {
+//             if (ref_info-> Nsamples < deg_info-> Nsamples) {
+//                 float *new_ref = (float *) safe_malloc((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
+//                 long  i;
+//                 for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                     new_ref [i] = ref_info-> data [i];
+//                 }
+//                 for (i = ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
+//                      i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                     new_ref [i] = 0.0f;
+//                 }
+//                 safe_free (ref_info-> data);
+//                 ref_info-> data = new_ref;
+//                 new_ref = NULL;
+//             } else {
+//                 if (ref_info-> Nsamples > deg_info-> Nsamples) {
+//                     float *new_deg = (float *) safe_malloc((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
+//                     long  i;
+//                     for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                         new_deg [i] = deg_info-> data [i];
+//                     }
+//                     for (i = deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
+//                          i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                         new_deg [i] = 0.0f;
+//                     }
+//                     safe_free (deg_info-> data);
+//                     deg_info-> data = new_deg;
+//                     new_deg = NULL;
+//                 }
+//             }
+//         }        
 
-        //printf (" Acoustic model processing...\n");    
-        pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
+//         //printf (" Acoustic model processing...\n");    
+//         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
     
-        safe_free (ref_info-> data);
-        safe_free (ref_info-> VAD);
-        safe_free (ref_info-> logVAD);
-        safe_free (deg_info-> data);
-        safe_free (deg_info-> VAD);
-        safe_free (deg_info-> logVAD);
-        safe_free (ftmp);
+//         safe_free (ref_info-> data);
+//         safe_free (ref_info-> VAD);
+//         safe_free (ref_info-> logVAD);
+//         safe_free (deg_info-> data);
+//         safe_free (deg_info-> VAD);
+//         safe_free (deg_info-> logVAD);
+//         safe_free (ftmp);
 
-		if ( err_info->mode == NB_MODE )
-		{
-			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.4945f*err_info->pesq_mos+4.6607f)));
-		}
-		else
-		{
-			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.3669f*err_info->pesq_mos+3.8224f)));
-			err_info->pesq_mos = -1.0;
-		}
+// 		if ( err_info->mode == NB_MODE )
+// 		{
+// 			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.4945f*err_info->pesq_mos+4.6607f)));
+// 		}
+// 		else
+// 		{
+// 			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.3669f*err_info->pesq_mos+3.8224f)));
+// 			err_info->pesq_mos = -1.0;
+// 		}
 
 //         if (resultsFile != NULL) {
 //             long start, end;
@@ -509,7 +509,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         //    f//printf (resultsFile, "\n", Fs);
 
         //    fclose (resultsFile);
-        }
+//         }
 
     }
 
