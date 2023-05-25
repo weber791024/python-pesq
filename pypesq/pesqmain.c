@@ -253,16 +253,16 @@ void fix_power_level (SIGNAL_INFO *info, char *name, long maxNsamples)
            struct floatArray ref_info252;
            ref_info252.fData=align_filtered;
            ref_info252.fLen=info-> Nsamples;
-           saveasBin(ref_info252,"ref_info252.raw");
+//            saveasBin(ref_info252,"ref_info252.raw");
     global_scale = (float) sqrt (TARGET_AVG_POWER / power_above_300Hz); 
-   printf("global_scale: %10.10f\n", global_scale);
+//    printf("global_scale: %10.10f\n", global_scale);
     for (i = 0; i < n; i++) {
         info-> data [i] *= global_scale;    
     }
           struct floatArray ref_info261;
            ref_info261.fData=info-> data;
            ref_info261.fLen=info-> Nsamples;
-           saveasBin(ref_info261,"ref_info261.raw");
+//            saveasBin(ref_info261,"ref_info261.raw");
     safe_free (align_filtered);
 }
 
@@ -340,9 +340,9 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
               struct floatArray ref_info328;
               ref_info328.fData=ref_info->data;
               ref_info328.fLen=ref_n_samples;
-              saveasBin(ref_info328,"ref_info328.raw");
-//         fix_power_level (ref_info, "reference", maxNsamples);
-//         fix_power_level (deg_info, "degraded", maxNsamples);
+//               saveasBin(ref_info328,"ref_info328.raw");
+        fix_power_level (ref_info, "reference", maxNsamples);
+        fix_power_level (deg_info, "degraded", maxNsamples);
 //               struct floatArray ref_info331;
 //               ref_info331.fData=ref_info->data;
 //               ref_info331.fLen=ref_n_samples;
