@@ -222,14 +222,14 @@ void load_src( long * Error_Flag, char ** Error_Type,
       *(read_ptr++) = 0.0f;
 
     int i = Nsamples;
-    float dataf=0;
+//     float dataf=0;
 //     printf("%d\n", i);
     while(i--){
-          dataf=*p_input;
-          dataf/=32768;
-      *(read_ptr++) = dataf;
-       *(p_input)++;
-//         *(read_ptr++) = float)((*(p_input++));
+//           dataf=*p_input;
+//           dataf/=32768;
+//       *(read_ptr++) = dataf;
+//        *(p_input)++;
+        *(read_ptr++) = float)((*(p_input++));
     }
 //     printf("%.10f\n", sinfo->data[0]);
 //     printf("%.10f\n", sinfo->data[1]);
@@ -238,9 +238,9 @@ void load_src( long * Error_Flag, char ** Error_Type,
 //     printf("%d\n", data[0]);
 //     printf("%d\n", data[1]);
 //     printf("%d\n", data[2]);
-    FILE *pFile = fopen("ref_info241io.raw", "wb");
-    fwrite(sinfo->data, sizeof(float), 66880, pFile);
-    fclose(pFile);
+//     FILE *pFile = fopen("ref_info241io.raw", "wb");
+//     fwrite(sinfo->data, sizeof(float), 66880, pFile);
+//     fclose(pFile);
     for( read_count = DATAPADDING_MSECS  * (Fs / 1000) + SEARCHBUFFER * Downsample;
          read_count > 0; read_count-- )
       *(read_ptr++) = 0.0f;
