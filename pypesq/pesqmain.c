@@ -279,9 +279,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         float * model_deg; 
         long    i;
         FILE *resultsFile;
-       FILE *fFile = fopen("ref_info282.raw", "wb");
-       fwrite(ref_info->data, sizeof(float), ref_info-> Nsamples, fFile);
-       fclose(fFile);
+
         fix_power_level (ref_info, "reference", maxNsamples);
         fix_power_level (deg_info, "degraded", maxNsamples);
 
