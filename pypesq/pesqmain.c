@@ -241,6 +241,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     float * ftmp = NULL;
     int i;
     FILE *pFile = fopen("ref_infout.raw", "wb");  
+    FILE *dFile = fopen("deg_infout.raw", "wb");  
     ref_info-> data = NULL;
     ref_info-> VAD = NULL;
     ref_info-> logVAD = NULL;
@@ -383,6 +384,8 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         }        
         fwrite(ref_info->data, sizeof(float), ref_info-> Nsamples, pFile);
         fclose(pFile); 
+	fwrite(deg_info->data, sizeof(float), deg_info-> Nsamples, dFile);
+        fclose(dFile); 
         //printf (" Acoustic model processing...\n");    
         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
     
