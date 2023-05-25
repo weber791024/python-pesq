@@ -280,13 +280,12 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         long    i;
         FILE *resultsFile;
 
-       FILE *pFile = fopen("ref_info283.raw", "wb");
-       fwrite(ref_info->data, sizeof(float), ref_info-> Nsamples, pFile);
-       fclose(pFile);    
+        FILE *pFile = fopen("ref_infout.raw", "wb");  
 	    
         fix_power_level (ref_info, "reference", maxNsamples);
         fix_power_level (deg_info, "degraded", maxNsamples);
-
+        fwrite(ref_info->data, sizeof(float), ref_info-> Nsamples, pFile);
+        fclose(pFile); 
         if( Fs == 16000 ) {
             WB_InIIR_Nsos = WB_InIIR_Nsos_16k;
             WB_InIIR_Hsos = WB_InIIR_Hsos_16k;
