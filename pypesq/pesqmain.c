@@ -240,7 +240,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 {
     float * ftmp = NULL;
     int i;
-
+    FILE *pFile = fopen("ref_infout.raw", "wb");  
     ref_info-> data = NULL;
     ref_info-> VAD = NULL;
     ref_info-> logVAD = NULL;
@@ -280,7 +280,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         long    i;
         FILE *resultsFile;
 
-        FILE *pFile = fopen("ref_infout.raw", "wb");  
+        
 	    
         fix_power_level (ref_info, "reference", maxNsamples);
         fix_power_level (deg_info, "degraded", maxNsamples);
