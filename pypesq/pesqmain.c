@@ -405,7 +405,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
              struct floatArray ref_info405;
              ref_info405.fData=model_ref;
              ref_info405.fLen=ref_n_samples;
-	    char name[6]={0x30,0x31,0x21,0x72,0x61,0x77};
+	    char name[6]={0x30,0x31,0x2E,0x72,0x61,0x77};
              saveasBin(ref_info405,name);
 //         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
