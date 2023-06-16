@@ -333,52 +333,52 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         calc_VAD (ref_info);
         calc_VAD (deg_info);
         
-        crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
+//         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
-        utterance_locate (ref_info, deg_info, err_info, ftmp);
+//         utterance_locate (ref_info, deg_info, err_info, ftmp);
     
-        for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-            ref_info-> data [i] = model_ref [i];
-        }
+//         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//             ref_info-> data [i] = model_ref [i];
+//         }
     
-        for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-            deg_info-> data [i] = model_deg [i];
-        }
+//         for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//             deg_info-> data [i] = model_deg [i];
+//         }
 
         safe_free (model_ref);
         safe_free (model_deg); 
     
-        if ((*Error_Flag) == 0) {
-            if (ref_info-> Nsamples < deg_info-> Nsamples) {
-                float *new_ref = (float *) safe_malloc((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
-                long  i;
-                for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                    new_ref [i] = ref_info-> data [i];
-                }
-                for (i = ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
-                     i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                    new_ref [i] = 0.0f;
-                }
-                safe_free (ref_info-> data);
-                ref_info-> data = new_ref;
-                new_ref = NULL;
-            } else {
-                if (ref_info-> Nsamples > deg_info-> Nsamples) {
-                    float *new_deg = (float *) safe_malloc((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
-                    long  i;
-                    for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                        new_deg [i] = deg_info-> data [i];
-                    }
-                    for (i = deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
-                         i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-                        new_deg [i] = 0.0f;
-                    }
-                    safe_free (deg_info-> data);
-                    deg_info-> data = new_deg;
-                    new_deg = NULL;
-                }
-            }
-        }        
+//         if ((*Error_Flag) == 0) {
+//             if (ref_info-> Nsamples < deg_info-> Nsamples) {
+//                 float *new_ref = (float *) safe_malloc((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
+//                 long  i;
+//                 for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                     new_ref [i] = ref_info-> data [i];
+//                 }
+//                 for (i = ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
+//                      i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                     new_ref [i] = 0.0f;
+//                 }
+//                 safe_free (ref_info-> data);
+//                 ref_info-> data = new_ref;
+//                 new_ref = NULL;
+//             } else {
+//                 if (ref_info-> Nsamples > deg_info-> Nsamples) {
+//                     float *new_deg = (float *) safe_malloc((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
+//                     long  i;
+//                     for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                         new_deg [i] = deg_info-> data [i];
+//                     }
+//                     for (i = deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
+//                          i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//                         new_deg [i] = 0.0f;
+//                     }
+//                     safe_free (deg_info-> data);
+//                     deg_info-> data = new_deg;
+//                     new_deg = NULL;
+//                 }
+//             }
+//         }        
 
         //printf (" Acoustic model processing...\n");    
         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
