@@ -333,7 +333,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         calc_VAD (ref_info);
         calc_VAD (deg_info);
         
-        crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
+//         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
 //         utterance_locate (ref_info, deg_info, err_info, ftmp);
     
@@ -344,7 +344,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 //         for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
 //             deg_info-> data [i] = model_deg [i];
 //         }
-
+        printf("%d",DATAPADDING_MSECS);
         safe_free (model_ref);
         safe_free (model_deg); 
     
