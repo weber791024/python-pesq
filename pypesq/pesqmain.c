@@ -337,13 +337,13 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
 //         utterance_locate (ref_info, deg_info, err_info, ftmp);
     
-        for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-            ref_info-> data [i] = model_ref [i];
-        }
+//         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//             ref_info-> data [i] = model_ref [i];
+//         }
     
-        for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-            deg_info-> data [i] = model_deg [i];
-        }
+//         for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+//             deg_info-> data [i] = model_deg [i];
+//         }
 
         safe_free (model_ref);
         safe_free (model_deg); 
