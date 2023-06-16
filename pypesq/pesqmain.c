@@ -270,6 +270,9 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     if ((*Error_Flag) == 0)
     {
         alloc_other (ref_info, deg_info, Error_Flag, Error_Type, &ftmp);
+	printf("%f\n",&ftmp);
+	printf("%f\n",*ftmp);
+	printf("%f\n",ftmp);
     }
 
     if ((*Error_Flag) == 0)
