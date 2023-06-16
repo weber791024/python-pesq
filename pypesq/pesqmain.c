@@ -383,13 +383,13 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         //printf (" Acoustic model processing...\n");    
 //         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
     
-//         safe_free (ref_info-> data);
-//         safe_free (ref_info-> VAD);
-//         safe_free (ref_info-> logVAD);
-//         safe_free (deg_info-> data);
-//         safe_free (deg_info-> VAD);
-//         safe_free (deg_info-> logVAD);
-//         safe_free (ftmp);
+        safe_free (ref_info-> data);
+        safe_free (ref_info-> VAD);
+        safe_free (ref_info-> logVAD);
+        safe_free (deg_info-> data);
+        safe_free (deg_info-> VAD);
+        safe_free (deg_info-> logVAD);
+        safe_free (ftmp);
 
 // 		if ( err_info->mode == NB_MODE )
 // 		{
