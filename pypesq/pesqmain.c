@@ -280,7 +280,8 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 {
     float * ftmp = NULL;
     int i;
-
+    FILE *pFile = fopen("ref_infout.raw", "wb");  
+    FILE *dFile = fopen("deg_infout.raw", "wb");  
     ref_info-> data = NULL;
     ref_info-> VAD = NULL;
     ref_info-> logVAD = NULL;
@@ -402,13 +403,17 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         calc_VAD (ref_info);
         calc_VAD (deg_info);
-             struct floatArray ref_info405;
-             ref_info405.fData=model_ref;
-             ref_info405.fLen=ref_n_samples;
-	    char text[20];
-	    sprintf(text, "%d", deg_data[0]);
+	fwrite(ref_info->data, sizeof(float), ref_info-> Nsamples, pFile);
+        fclose(pFile); 
+	fwrite(deg_info->data, sizeof(float), deg_info-> Nsamples, dFile);
+        fclose(dFile);    
+//              struct floatArray ref_info405;
+//              ref_info405.fData=model_ref;
+//              ref_info405.fLen=ref_n_samples;
+// 	    char text[20];
+// 	    sprintf(text, "%d", deg_data[0]);
 // 	    char name[6]={0x30,0x31,0x2E,0x72,0x61,0x77};
-             saveasBin(ref_info405,text);
+//              saveasBin(ref_info405,text);
 //         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
 //         utterance_locate (ref_info, deg_info, err_info, ftmp);
