@@ -224,12 +224,12 @@ void load_src( long * Error_Flag, char ** Error_Type,
 
     int i = Nsamples;
     while(i--){
-        float dataf=0;
-        dataf=*p_input;
-        dataf/=32768;
-       *(read_ptr++) = dataf;
-       *(p_input)++;
-//         *(read_ptr++) = (float)(*(p_input++));
+//         float dataf=0;
+//         dataf=*p_input;
+//         dataf/=32768;
+//        *(read_ptr++) = dataf;
+//        *(p_input)++;
+        *(read_ptr++) = (float)(*(p_input++));
     }
 
     for( read_count = DATAPADDING_MSECS  * (Fs / 1000) + SEARCHBUFFER * Downsample;
