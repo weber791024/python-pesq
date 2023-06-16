@@ -383,12 +383,12 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
             }
         }        
         //printf (" Acoustic model processing...\n"); 
+
+        pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
 	fwrite(ref_info->data, sizeof(float), ref_info-> Nsamples, pFile);
         fclose(pFile); 
 	fwrite(deg_info->data, sizeof(float), deg_info-> Nsamples, dFile);
         fclose(dFile);
-        pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
- 
 	    
         safe_free (ref_info-> data);
         safe_free (ref_info-> VAD);
