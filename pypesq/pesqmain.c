@@ -381,40 +381,40 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 //         }        
 
         //printf (" Acoustic model processing...\n");    
-        pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
+//         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
     
-        safe_free (ref_info-> data);
-        safe_free (ref_info-> VAD);
-        safe_free (ref_info-> logVAD);
-        safe_free (deg_info-> data);
-        safe_free (deg_info-> VAD);
-        safe_free (deg_info-> logVAD);
-        safe_free (ftmp);
+//         safe_free (ref_info-> data);
+//         safe_free (ref_info-> VAD);
+//         safe_free (ref_info-> logVAD);
+//         safe_free (deg_info-> data);
+//         safe_free (deg_info-> VAD);
+//         safe_free (deg_info-> logVAD);
+//         safe_free (ftmp);
 
-		if ( err_info->mode == NB_MODE )
-		{
-			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.4945f*err_info->pesq_mos+4.6607f)));
-		}
-		else
-		{
-			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.3669f*err_info->pesq_mos+3.8224f)));
-			err_info->pesq_mos = -1.0;
-		}
+// 		if ( err_info->mode == NB_MODE )
+// 		{
+// 			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.4945f*err_info->pesq_mos+4.6607f)));
+// 		}
+// 		else
+// 		{
+// 			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.3669f*err_info->pesq_mos+3.8224f)));
+// 			err_info->pesq_mos = -1.0;
+// 		}
 
         if (resultsFile != NULL) {
             long start, end;
 
-            if (0 != fseek (resultsFile, 0, SEEK_SET)) {
-                printf ("Could not move to start of results file %s!\n", ITU_RESULTS_FILE);
-                exit (1);
-            }
-            start = ftell (resultsFile);
+//             if (0 != fseek (resultsFile, 0, SEEK_SET)) {
+//                 printf ("Could not move to start of results file %s!\n", ITU_RESULTS_FILE);
+//                 exit (1);
+//             }
+//             start = ftell (resultsFile);
 
-            if (0 != fseek (resultsFile, 0, SEEK_END)) {
-                printf ("Could not move to end of results file %s!\n", ITU_RESULTS_FILE);
-                exit (1);
-            }
-            end = ftell (resultsFile);
+//             if (0 != fseek (resultsFile, 0, SEEK_END)) {
+//                 printf ("Could not move to end of results file %s!\n", ITU_RESULTS_FILE);
+//                 exit (1);
+//             }
+//             end = ftell (resultsFile);
 
             // if (start == end) {
             //     f//printf (resultsFile, "REFERENCE\t DEGRADED\t PESQMOS\t MOSLQO\t SAMPLE_FREQ\t MODE\n"); 
