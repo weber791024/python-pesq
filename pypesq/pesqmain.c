@@ -327,10 +327,10 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     {
         alloc_other (ref_info, deg_info, Error_Flag, Error_Type, &ftmp);
     }
-          struct floatArray ref_info317;
-           ref_info317.fData=ref_info->data;
-           ref_info317.fLen=ref_n_samples;
-           saveasBin(ref_info317,"ref_info317.raw");
+//           struct floatArray ref_info317;
+//            ref_info317.fData=ref_info->data;
+//            ref_info317.fLen=ref_n_samples;
+//            saveasBin(ref_info317,"ref_info317.raw");
     if ((*Error_Flag) == 0)
     {   
         int     maxNsamples = max (ref_info-> Nsamples, deg_info-> Nsamples);
