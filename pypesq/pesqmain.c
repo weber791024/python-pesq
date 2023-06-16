@@ -108,34 +108,6 @@ Further information is also available from www.pesq.org
 #include "pesq.h"
 #include "dsp.h"
 
-#define float_size sizeof(float)
-#define short_size sizeof(short)
-#define char_size sizeof(char)
-
-struct floatArray{
-	float* fData; // float單位
-	int fLen; // 單位長度
-};
-
-void saveasBin(struct floatArray float_eg, char* fileDir){  
-    FILE *pFile = fopen(fileDir, "wb");
-//     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
-        fwrite(float_eg.fData, float_size, (float_eg.fLen), pFile);
-//     }
-    fclose(pFile);
-}
-
-struct shortArray{
-	short* sData; // float單位
-	int sLen; // 單位長度
-};
-void saveasshort(struct shortArray short_eg, char* fileDir){  
-    FILE *pFile = fopen(fileDir, "wb");
-//     for(int i = 0; i < float_eg.fLen; i++){//float_eg.fLen
-        fwrite(short_eg.sData, short_size, (short_eg.sLen), pFile);
-//     }
-    fclose(pFile);
-}
 #define ITU_RESULTS_FILE          "pesq_results.txt"
 
 
@@ -239,30 +211,18 @@ void fix_power_level (SIGNAL_INFO *info, char *name, long maxNsamples)
         align_filtered [i] = info-> data [i];
     }
     apply_filter (align_filtered, info-> Nsamples, 26, align_filter_dB);
-    
-//           struct floatArray ref_info243;
-//            ref_info243.fData=align_filtered;
-//            ref_info243.fLen=info-> Nsamples;
-//            saveasBin(ref_info243,"ref_info243.raw");	
-	
+
     power_above_300Hz = (float) pow_of (align_filtered, 
                                         SEARCHBUFFER * Downsample, 
                                         n - SEARCHBUFFER * Downsample + DATAPADDING_MSECS  * (Fs / 1000),
                                         maxNsamples - 2 * SEARCHBUFFER * Downsample + DATAPADDING_MSECS  * (Fs / 1000));
-	
-//            struct floatArray ref_info252;
-//            ref_info252.fData=align_filtered;
-//            ref_info252.fLen=info-> Nsamples;
-//            saveasBin(ref_info252,"ref_info252.raw");
+
     global_scale = (float) sqrt (TARGET_AVG_POWER / power_above_300Hz); 
-   printf("global_scale: %10.10f\n", global_scale);
+
     for (i = 0; i < n; i++) {
         info-> data [i] *= global_scale;    
     }
-          struct floatArray ref_info261;
-           ref_info261.fData=info-> data;
-           ref_info261.fLen=info-> Nsamples;
-           saveasBin(ref_info261,"ref_info261.raw");
+
     safe_free (align_filtered);
 }
 
@@ -280,8 +240,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 {
     float * ftmp = NULL;
     int i;
-    FILE *pFile = fopen("ref_infout.raw", "wb");  
-    FILE *dFile = fopen("deg_infout.raw", "wb");  
+
     ref_info-> data = NULL;
     ref_info-> VAD = NULL;
     ref_info-> logVAD = NULL;
@@ -293,23 +252,8 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     if ((*Error_Flag) == 0)
     {
        load_src (Error_Flag, Error_Type, ref_info, ref_data, ref_n_samples, fs);
-// 	  printf("%d\n", Error_Flag);
-// 	  printf("%d\n", Error_Type);
-//           struct floatArray ref_infof;
-//            ref_infof.fData=ref_info->data;
-//            ref_infof.fLen=ref_n_samples;
-//            saveasBin(ref_infof,"src_ref_info.raw");
-// 	   printf("%.10f\n", ref_infof.fData[0]);
-// 	   printf("%.10f\n", ref_infof.fData[1]);
-// 	   printf("%.10f\n", ref_infof.fData[2]);
-// 	   printf("%.10f\n", ref_infof.fData[3]);
-// 	   printf("%.10f\n", ref_infof.fData[4]);
-// 	   struct shortArray ref_datas;
-//            ref_datas.sData=ref_data;
-//            ref_datas.sLen=ref_n_samples;
-//            saveasshort(ref_datas,"src_ref_data.raw");
+
     }
-	
     if ((*Error_Flag) == 0)
     {
        load_src (Error_Flag, Error_Type, deg_info, deg_data, deg_n_samples, fs);
@@ -327,10 +271,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     {
         alloc_other (ref_info, deg_info, Error_Flag, Error_Type, &ftmp);
     }
-//           struct floatArray ref_info317;
-//            ref_info317.fData=ref_info->data;
-//            ref_info317.fLen=ref_n_samples;
-//            saveasBin(ref_info317,"ref_info317.raw");
+
     if ((*Error_Flag) == 0)
     {   
         int     maxNsamples = max (ref_info-> Nsamples, deg_info-> Nsamples);
@@ -338,16 +279,10 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         float * model_deg; 
         long    i;
         FILE *resultsFile;
-//               struct floatArray ref_info328;
-//               ref_info328.fData=ref_info->data;
-//               ref_info328.fLen=ref_n_samples;
-//               saveasBin(ref_info328,"ref_info328.raw");
-//         fix_power_level (ref_info, "reference", maxNsamples);
-//         fix_power_level (deg_info, "degraded", maxNsamples);
-//               struct floatArray ref_info331;
-//               ref_info331.fData=ref_info->data;
-//               ref_info331.fLen=ref_n_samples;
-//               saveasBin(ref_info331,"ref_info331.raw");
+
+        fix_power_level (ref_info, "reference", maxNsamples);
+        fix_power_level (deg_info, "degraded", maxNsamples);
+
         if( Fs == 16000 ) {
             WB_InIIR_Nsos = WB_InIIR_Nsos_16k;
             WB_InIIR_Hsos = WB_InIIR_Hsos_16k;
@@ -384,17 +319,11 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         model_ref = (float *) safe_malloc ((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
         model_deg = (float *) safe_malloc ((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof (float));
-//              struct floatArray ref_info374;
-//              ref_info374.fData=model_ref;
-//              ref_info374.fLen=ref_n_samples;
-//              saveasBin(ref_info374,"ref_info374.raw");
+
         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
             model_ref [i] = ref_info-> data [i];
         }
-//              struct floatArray ref_info381;
-//              ref_info381.fData=model_ref;
-//              ref_info381.fLen=ref_n_samples;
-//              saveasBin(ref_info381,"ref_info381.raw");
+    
         for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
             model_deg [i] = deg_info-> data [i];
         }
@@ -403,99 +332,89 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 
         calc_VAD (ref_info);
         calc_VAD (deg_info);
-	fwrite(ref_info->data, sizeof(float), ref_info-> Nsamples, pFile);
-        fclose(pFile); 
-	fwrite(deg_info->data, sizeof(float), deg_info-> Nsamples, dFile);
-        fclose(dFile);    
-//              struct floatArray ref_info405;
-//              ref_info405.fData=model_ref;
-//              ref_info405.fLen=ref_n_samples;
-// 	    char text[20];
-// 	    sprintf(text, "%d", deg_data[0]);
-// 	    char name[6]={0x30,0x31,0x2E,0x72,0x61,0x77};
-//              saveasBin(ref_info405,text);
-//         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
+        
+        crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
-//         utterance_locate (ref_info, deg_info, err_info, ftmp);
+        utterance_locate (ref_info, deg_info, err_info, ftmp);
     
-//         for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-//             ref_info-> data [i] = model_ref [i];
-//         }
+        for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+            ref_info-> data [i] = model_ref [i];
+        }
     
-//         for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-//             deg_info-> data [i] = model_deg [i];
-//         }
+        for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+            deg_info-> data [i] = model_deg [i];
+        }
 
-//         safe_free (model_ref);
-//         safe_free (model_deg); 
+        safe_free (model_ref);
+        safe_free (model_deg); 
     
-//         if ((*Error_Flag) == 0) {
-//             if (ref_info-> Nsamples < deg_info-> Nsamples) {
-//                 float *new_ref = (float *) safe_malloc((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
-//                 long  i;
-//                 for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-//                     new_ref [i] = ref_info-> data [i];
-//                 }
-//                 for (i = ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
-//                      i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-//                     new_ref [i] = 0.0f;
-//                 }
-//                 safe_free (ref_info-> data);
-//                 ref_info-> data = new_ref;
-//                 new_ref = NULL;
-//             } else {
-//                 if (ref_info-> Nsamples > deg_info-> Nsamples) {
-//                     float *new_deg = (float *) safe_malloc((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
-//                     long  i;
-//                     for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-//                         new_deg [i] = deg_info-> data [i];
-//                     }
-//                     for (i = deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
-//                          i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
-//                         new_deg [i] = 0.0f;
-//                     }
-//                     safe_free (deg_info-> data);
-//                     deg_info-> data = new_deg;
-//                     new_deg = NULL;
-//                 }
-//             }
-//         }        
+        if ((*Error_Flag) == 0) {
+            if (ref_info-> Nsamples < deg_info-> Nsamples) {
+                float *new_ref = (float *) safe_malloc((deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
+                long  i;
+                for (i = 0; i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+                    new_ref [i] = ref_info-> data [i];
+                }
+                for (i = ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
+                     i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+                    new_ref [i] = 0.0f;
+                }
+                safe_free (ref_info-> data);
+                ref_info-> data = new_ref;
+                new_ref = NULL;
+            } else {
+                if (ref_info-> Nsamples > deg_info-> Nsamples) {
+                    float *new_deg = (float *) safe_malloc((ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float));
+                    long  i;
+                    for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+                        new_deg [i] = deg_info-> data [i];
+                    }
+                    for (i = deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); 
+                         i < ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
+                        new_deg [i] = 0.0f;
+                    }
+                    safe_free (deg_info-> data);
+                    deg_info-> data = new_deg;
+                    new_deg = NULL;
+                }
+            }
+        }        
 
-//         //printf (" Acoustic model processing...\n");    
-//         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
+        //printf (" Acoustic model processing...\n");    
+        pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
     
-//         safe_free (ref_info-> data);
-//         safe_free (ref_info-> VAD);
-//         safe_free (ref_info-> logVAD);
-//         safe_free (deg_info-> data);
-//         safe_free (deg_info-> VAD);
-//         safe_free (deg_info-> logVAD);
-//         safe_free (ftmp);
+        safe_free (ref_info-> data);
+        safe_free (ref_info-> VAD);
+        safe_free (ref_info-> logVAD);
+        safe_free (deg_info-> data);
+        safe_free (deg_info-> VAD);
+        safe_free (deg_info-> logVAD);
+        safe_free (ftmp);
 
-// 		if ( err_info->mode == NB_MODE )
-// 		{
-// 			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.4945f*err_info->pesq_mos+4.6607f)));
-// 		}
-// 		else
-// 		{
-// 			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.3669f*err_info->pesq_mos+3.8224f)));
-// 			err_info->pesq_mos = -1.0;
-// 		}
+		if ( err_info->mode == NB_MODE )
+		{
+			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.4945f*err_info->pesq_mos+4.6607f)));
+		}
+		else
+		{
+			err_info->mapped_mos = 0.999f+4.0f/(1.0f+(float)exp((-1.3669f*err_info->pesq_mos+3.8224f)));
+			err_info->pesq_mos = -1.0;
+		}
 
-//         if (resultsFile != NULL) {
-//             long start, end;
+        if (resultsFile != NULL) {
+            long start, end;
 
-//             if (0 != fseek (resultsFile, 0, SEEK_SET)) {
-//                 printf ("Could not move to start of results file %s!\n", ITU_RESULTS_FILE);
-//                 exit (1);
-//             }
-//             start = ftell (resultsFile);
+            if (0 != fseek (resultsFile, 0, SEEK_SET)) {
+                printf ("Could not move to start of results file %s!\n", ITU_RESULTS_FILE);
+                exit (1);
+            }
+            start = ftell (resultsFile);
 
-//             if (0 != fseek (resultsFile, 0, SEEK_END)) {
-//                 printf ("Could not move to end of results file %s!\n", ITU_RESULTS_FILE);
-//                 exit (1);
-//             }
-//             end = ftell (resultsFile);
+            if (0 != fseek (resultsFile, 0, SEEK_END)) {
+                printf ("Could not move to end of results file %s!\n", ITU_RESULTS_FILE);
+                exit (1);
+            }
+            end = ftell (resultsFile);
 
             // if (start == end) {
             //     f//printf (resultsFile, "REFERENCE\t DEGRADED\t PESQMOS\t MOSLQO\t SAMPLE_FREQ\t MODE\n"); 
@@ -517,7 +436,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         //    f//printf (resultsFile, "\n", Fs);
 
         //    fclose (resultsFile);
-//         }
+        }
 
     }
 
