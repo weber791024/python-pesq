@@ -329,9 +329,9 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         }
     
         input_filter( ref_info, deg_info, ftmp );
-        printf("%f",&ftmp);
-	printf("%f",*ftmp);
-	printf("%f",ftmp);
+        printf("%f\n",&ftmp);
+	printf("%f\n",*ftmp);
+	printf("%f\n",ftmp);
         calc_VAD (ref_info);
         calc_VAD (deg_info);
         
