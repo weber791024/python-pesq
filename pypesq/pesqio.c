@@ -119,6 +119,7 @@ void make_stereo_file2 (char *stereo_path_name, SIGNAL_INFO *ref_info, float *de
     long            n;
 
     n = ref_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000) - 2 * SEARCHBUFFER * Downsample;     
+
     buffer = (short *) safe_malloc (2 * n * sizeof (short));
     
     if ((outputFile = fopen (stereo_path_name, "wb")) == NULL) {
@@ -203,7 +204,7 @@ void load_src( long * Error_Flag, char ** Error_Type,
     Fs = fs;
     Nsamples = n_samples;
     sinfo-> Nsamples = Nsamples + 2 * SEARCHBUFFER * Downsample;
-    
+
     sinfo-> data =
         (float *) safe_malloc( (sinfo-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000)) * sizeof(float) );
     if( sinfo-> data == NULL )
@@ -222,8 +223,10 @@ void load_src( long * Error_Flag, char ** Error_Type,
       *(read_ptr++) = 0.0f;
 
     int i = Nsamples;
-    float dataf=0;
-  
+    while(i--){
+        *(read_ptr++) = (float)(*(p_input++));
+    }
+
     for( read_count = DATAPADDING_MSECS  * (Fs / 1000) + SEARCHBUFFER * Downsample;
          read_count > 0; read_count-- )
       *(read_ptr++) = 0.0f;
@@ -257,4 +260,3 @@ void alloc_other( SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 }
 
 /* END OF FILE */
-
