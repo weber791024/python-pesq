@@ -333,7 +333,7 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         calc_VAD (ref_info);
         calc_VAD (deg_info);
         
-//         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
+        crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
 //         utterance_locate (ref_info, deg_info, err_info, ftmp);
     
