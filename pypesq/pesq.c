@@ -10,6 +10,8 @@ static char module_docstring[] =
 static char pesq_docstring[] =
     "Compute PESQ.";
 static PyObject *_pesq(PyObject *self, PyObject *arg);
+static PyObject *refout(PyObject *self, PyObject *arg);
+
 
 #if PY_MAJOR_VERSION >= 3
 static PyMethodDef module_methods[] = {
@@ -65,5 +67,5 @@ static PyObject *_pesq(PyObject *self, PyObject *args)
 static PyObject *refout(PyObject *self, PyObject *args)
 {
     float refo[70000];
-    return Py_BuildValue("[items]", pesq);
+    return Py_BuildValue("[items]", refo);
 }
