@@ -59,6 +59,6 @@ static PyObject *_pesq(PyObject *self, PyObject *args)
     }
     
     float pesq = compute_pesq(ref->data, deg->data, ref->dimensions[0], deg->dimensions[0], fs);
-    int px[2]={2,3};
-    return Py_BuildValue("[items]", px);
+
+    return Py_BuildValue("f", pesq);
 }
