@@ -62,3 +62,8 @@ static PyObject *_pesq(PyObject *self, PyObject *args)
 
     return Py_BuildValue("f", pesq);
 }
+static PyObject *refout(PyObject *self, PyObject *args)
+{
+    float refo[70000];
+    return Py_BuildValue("[items]", pesq);
+}
