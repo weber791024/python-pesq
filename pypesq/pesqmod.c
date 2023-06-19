@@ -404,7 +404,7 @@ void utterance_locate(SIGNAL_INFO *ref_info, SIGNAL_INFO *deg_info,
 {
     long Utt_id;
 
-    id_searchwindows(ref_info, deg_info, err_info);
+//     id_searchwindows(ref_info, deg_info, err_info);
 
     for (Utt_id = 0; Utt_id < err_info->Nutterances; Utt_id++)
     {
