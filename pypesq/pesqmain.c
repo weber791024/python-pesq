@@ -270,9 +270,9 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
     if ((*Error_Flag) == 0)
     {
         alloc_other (ref_info, deg_info, Error_Flag, Error_Type, &ftmp);
-	printf("%f\n",&ftmp);
-	printf("%f\n",*ftmp);
-	printf("%f\n",ftmp);
+// 	printf("%f\n",&ftmp);
+// 	printf("%f\n",*ftmp);
+// 	printf("%f\n",ftmp);
     }
 
     if ((*Error_Flag) == 0)
@@ -332,11 +332,11 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         }
     
         input_filter( ref_info, deg_info, ftmp );
-        printf("%f\n",&ftmp);
-	printf("%f\n",*ftmp);
-	printf("%f\n",ftmp);
-        calc_VAD (ref_info);
-        calc_VAD (deg_info);
+//         printf("%f\n",&ftmp);
+// 	printf("%f\n",*ftmp);
+// 	printf("%f\n",ftmp);
+//         calc_VAD (ref_info);
+//         calc_VAD (deg_info);
         
 //         crude_align (ref_info, deg_info, err_info, WHOLE_SIGNAL, ftmp);
 
@@ -349,8 +349,8 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
 //         for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
 //             deg_info-> data [i] = model_deg [i];
 //         }        
-        safe_free (model_ref);
-        safe_free (model_deg); 
+//         safe_free (model_ref);
+//         safe_free (model_deg); 
     
 //         if ((*Error_Flag) == 0) {
 //             if (ref_info-> Nsamples < deg_info-> Nsamples) {
@@ -387,13 +387,13 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         //printf (" Acoustic model processing...\n");    
 //         pesq_psychoacoustic_model (ref_info, deg_info, err_info, ftmp);
     
-        safe_free (ref_info-> data);
-        safe_free (ref_info-> VAD);
-        safe_free (ref_info-> logVAD);
-        safe_free (deg_info-> data);
-        safe_free (deg_info-> VAD);
-        safe_free (deg_info-> logVAD);
-        safe_free (ftmp);
+//         safe_free (ref_info-> data);
+//         safe_free (ref_info-> VAD);
+//         safe_free (ref_info-> logVAD);
+//         safe_free (deg_info-> data);
+//         safe_free (deg_info-> VAD);
+//         safe_free (deg_info-> logVAD);
+//         safe_free (ftmp);
 
 // 		if ( err_info->mode == NB_MODE )
 // 		{
