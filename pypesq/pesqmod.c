@@ -408,8 +408,8 @@ void utterance_locate(SIGNAL_INFO *ref_info, SIGNAL_INFO *deg_info,
 
     for (Utt_id = 0; Utt_id < err_info->Nutterances; Utt_id++)
     {
-        crude_align(ref_info, deg_info, err_info, Utt_id, ftmp);
-        time_align(ref_info, deg_info, err_info, Utt_id, ftmp);
+//         crude_align(ref_info, deg_info, err_info, Utt_id, ftmp);
+//         time_align(ref_info, deg_info, err_info, Utt_id, ftmp);
     }
 
     id_utterances(ref_info, deg_info, err_info);
