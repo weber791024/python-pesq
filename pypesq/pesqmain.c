@@ -332,12 +332,12 @@ void pesq_measure (SIGNAL_INFO * ref_info, SIGNAL_INFO * deg_info,
         for (i = 0; i < deg_info-> Nsamples + DATAPADDING_MSECS  * (Fs / 1000); i++) {
             model_deg [i] = deg_info-> data [i];
         }
-    
-        input_filter( ref_info, deg_info, ftmp );
         fwrite(ref_info->data, sizeof(float), ref_info-> Nsamples, pFile);
         fclose(pFile); 
 	fwrite(deg_info->data, sizeof(float), deg_info-> Nsamples, dFile);
         fclose(dFile);
+        input_filter( ref_info, deg_info, ftmp );
+
 //         printf("%f\n",&ftmp);
 // 	printf("%f\n",*ftmp);
 // 	printf("%f\n",ftmp);
