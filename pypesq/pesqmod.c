@@ -412,9 +412,9 @@ void utterance_locate(SIGNAL_INFO *ref_info, SIGNAL_INFO *deg_info,
 //         time_align(ref_info, deg_info, err_info, Utt_id, ftmp);
     }
 
-    id_utterances(ref_info, deg_info, err_info);
+//     id_utterances(ref_info, deg_info, err_info);
 
-    utterance_split(ref_info, deg_info, err_info, ftmp);
+//     utterance_split(ref_info, deg_info, err_info, ftmp);
 }
 
 void short_term_fft(int Nf, SIGNAL_INFO *info, float *window, long start_sample, float *hz_spectrum, float *fft_tmp)
